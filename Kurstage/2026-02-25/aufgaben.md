@@ -27,3 +27,9 @@ Die Zuzahlung berechnet sich so:
 Die Zuzahlung beträgt 10 % des Abgabepreises, allerdings mindestens 5 € aber nicht mehr als 10 €.
 
 Zeichne einen Programmablaufplan und ein Struktogramm.
+
+# Aufgabe 3
+
+Schreibe Pseudocode für folgendes Programm:
+
+Es soll die Summe aller ganzen Zahlen, welche durch 3 teilbar sind berechnet und ausgegeben werden. Der Bereich beginnt mit der Zahl 1 und endet mit der Zahl 100. 
