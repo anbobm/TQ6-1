@@ -1,0 +1,9 @@
+summe := 0
+   
+Für zahl von 1 bis 100 wiederhole:
+    Wenn zahl % 3 = 0 Dann:
+        summe = summe + zahl
+    Ende Wenn
+Ende Für
+
+Ausgabe summe
