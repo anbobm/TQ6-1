@@ -1,4 +1,3 @@
-
 # Aufgabe 1: Funktionale und nichtfunktionale Anforderungen
 
 Teile die gegebene Liste der Anforderungen in funktionale und nichtfunktionale Anforderungen auf:
@@ -26,7 +25,7 @@ Teile die gegebene Liste der Anforderungen in funktionale und nichtfunktionale A
 * (F) Kunden sollen Produkte nach Kategorien filtern können.
 * (NF) Das System muss mindestens 10.000 Benutzer gleichzeitig unterstützen.
 * (F) Beim Bezahlen soll der Benutzer zwischen PayPal, Kreditkarte und Sofortüberweisung wählen können.
-* (NF) Alle Datenübertragungen müssen verschlüsselt stattfinden.
+* (F) Alle Datenübertragungen müssen verschlüsselt stattfinden.
 * (F) Der Warenkorb eines Benutzers soll automatisch gespeichert werden.
 * (NF) Die Anwendung soll für mobile Geräte optimiert sein.
 * (F) Das System soll eine Bestellbestätigung per E-Mail versenden.
