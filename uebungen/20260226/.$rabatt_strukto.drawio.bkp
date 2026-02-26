@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram name="Seite-1" id="HF67PmyD7Y4jP1QAjRZZ">
+    <mxGraphModel dx="1424" dy="837" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Eingabe Bestellwert" vertex="1">
+          <mxGeometry height="60" width="400" x="280" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="400" x="280" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-5" parent="1" style="triangle;whiteSpace=wrap;html=1;direction=south;" value="Bestellwert &amp;gt; 200" vertex="1">
+          <mxGeometry height="60" width="400" x="280" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="True" vertex="1">
+          <mxGeometry height="30" width="60" x="310" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="False" vertex="1">
+          <mxGeometry height="30" width="60" x="600" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Preis = Bestellwert * 0.85" vertex="1">
+          <mxGeometry height="130" width="200" x="280" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="200" x="480" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-10" parent="1" style="triangle;whiteSpace=wrap;html=1;direction=south;" value="Bestellwert &amp;gt; 100" vertex="1">
+          <mxGeometry height="70" width="200" x="480" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Preis = Bestellwert * 0.9" vertex="1">
+          <mxGeometry height="60" width="100" x="480" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="True" vertex="1">
+          <mxGeometry height="30" width="60" x="480" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="False" vertex="1">
+          <mxGeometry height="30" width="60" x="620" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Preis = Bestellwert" vertex="1">
+          <mxGeometry height="60" width="100" x="580" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="o-cb0QuWvrarvHiS-4AQ-16" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Automatische Rabattberechnung" vertex="1">
+          <mxGeometry height="380" width="540" x="210" y="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
