@@ -32,6 +32,41 @@ Das Lastenheft wird vom Auftraggeber erstellt und enthält alle Anforderungen an
 
 Das Pflichtenheft wird vom Auftraggeber entwickelt. Es beantwortet die Fragen wie und womit die im Lastenheft gestellten Anforderungen realisiert werden.
 
+### Aufgabe: Funktionale und nichtfunktionale Anforderungen
+
+26-02-2026
+
+Teile die gegebene Liste der Anforderungen in funktionale und nichtfunktionale Anforderungen auf:
+
+## Anforderungen
+
+- Das System soll es Benutzern ermöglichen, sich mit Benutzername und Passwort anzumelden.
+- Die Benutzeroberfläche soll innerhalb von 2 Sekunden nach jeder Aktion reagieren.
+- Kunden sollen Produkte nach Kategorien filtern können.
+- Das System muss mindestens 10.000 Benutzer gleichzeitig unterstützen.
+- Beim Bezahlen soll der Benutzer zwischen PayPal, Kreditkarte und Sofortüberweisung wählen können.
+- Alle Datenübertragungen müssen verschlüsselt stattfinden.
+- Der Warenkorb eines Benutzers soll automatisch gespeichert werden.
+- Die Anwendung soll für mobile Geräte optimiert sein.
+- Das System soll eine Bestellbestätigung per E-Mail versenden.
+- Das System soll rund um die Uhr verfügbar sein (24/7).
+- Nur Administratoren dürfen neue Produkte anlegen oder löschen.
+- Das System soll höchstens einmal pro Monat für Wartungen offline sein.
+- Fehlermeldungen sollen dem Benutzer verständlich und klar angezeigt werden.
+- Das System soll automatisch Backups der Datenbank erstellen.
+- Das System soll innerhalb von 5 Sekunden aus einem vollständigen Backup wiederherstellbar sein.
+
+| Funktional | Nichtfunktional |
+| :--------- | :-------------- |
+| Das System soll es Benutzern ermöglichen, sich mit Benutzername und Passwort anzumelden. | Die Benutzeroberfläche soll innerhalb von 2 Sekunden nach jeder Aktion reagieren. |
+| Kunden sollen Produkte nach Kategorien filtern können. | Das System muss mindestens 10.000 Benutzer gleichzeitig unterstützen. |
+| Beim Bezahlen soll der Benutzer zwischen PayPal, Kreditkarte und Sofortüberweisung wählen können. | Die Anwendung soll für mobile Geräte optimiert sein. |
+| Alle Datenübertragungen müssen verschlüsselt stattfinden. | Das System soll rund um die Uhr verfügbar sein (24/7). |
+| Der Warenkorb eines Benutzers soll automatisch gespeichert werden. | Das System soll höchstens einmal pro Monat für Wartungen offline sein. |
+| Das System soll eine Bestellbestätigung per E-Mail versenden. | Fehlermeldungen sollen dem Benutzer verständlich und klar angezeigt werden. |
+| Nur Administratoren dürfen neue Produkte anlegen oder löschen. | Das System soll innerhalb von 5 Sekunden aus einem vollständigen Backup wiederherstellbar sein. |
+| Das System soll automatisch Backups der Datenbank erstellen. | |
+
 ### Design {#design}
 
 #### Programmablaufplan {#pap}
