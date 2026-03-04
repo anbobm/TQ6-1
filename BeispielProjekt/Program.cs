@@ -24,12 +24,12 @@
         Console.WriteLine(Convert.ToInt32("f10101", 16));
 
         // Ganzzahlige Division (links und rechts vom / ist ganzzahlig)
-        var quotient = 7 / 2;
-        Console.WriteLine(quotient);
+        var quotient_int = 7 / 2;
+        Console.WriteLine(quotient_int);
 
         // Gebrochenzahlige Division (links oder rechts vom / ist gebrochen)
-        quotient = 7 / 2;
-        Console.WriteLine(quotient);
+        var quotient_double = 7 / 2.0;
+        Console.WriteLine(quotient_double);
     }
 }
 
