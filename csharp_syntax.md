@@ -104,3 +104,17 @@ string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\
 Console.WriteLine($"View English output:\n  c:\\Exercise\\{projectName}\\data.txt");
 Console.WriteLine($"\n{russianMessage}:\n  c:\\Exercise\\{projectName}\\ru-Ru\\data.txt");
 '''
+
+# Methoden
+public / private
+static -> Methode kann aufgerufen werden ohne dass ein Object der Klasse erzeugt wurde
+void -> Methode hat keinen Rückgabewert
+
+// seed ist optional
+// random object muss erst angelegt werden.
+var random = new Random(seed)
+
+erzeugt random integer
+random.Next(min, max)
+// min inklusive
+// max 
