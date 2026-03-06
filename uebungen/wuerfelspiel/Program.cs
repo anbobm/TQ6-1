@@ -6,9 +6,30 @@ Console.WriteLine(scoreSheet.Points[0].Name);
 Console.WriteLine(scoreSheet.Points[0].Points);
 Console.WriteLine(scoreSheet.Points[0].Open);
 
+var turn = new Turn();
+turn.rollAll();
+Console.WriteLine(turn.currentRoll());
+
 class Turn {
     public int tries {get; set;} = 0;
-    public List<int> rolls 
+    public List<int> rolls {get; set;} = [];
+
+    public string currentRoll(){
+        List<string> dices = new List<string>(["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]);
+        string currRoll = "";
+        foreach(int val in rolls){
+            currRoll += $"{dices[val-1]} ";
+        }
+        return currRoll;
+    }
+
+    public List<int> rollAll(){
+        var random = new Random();
+        for(int i=0; i<5; i+=1){
+            rolls.Add(random.Next(1, 7));
+        }
+        return rolls;
+    }
 }
 
 class Score {
