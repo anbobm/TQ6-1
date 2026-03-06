@@ -1,3 +1,15 @@
+# Neues Projekt anlegen
+
+```
+dotnet new console -n mein_projekt
+```
+
+# Projekt starten
+
+```
+dotnet run
+```
+
 # Variablen
 
 ## Explizite Deklaration
@@ -6,12 +18,12 @@ Um eine Variable explizit zu deklarieren benutze das Pattern Datentyp gefolgt vo
 
 Beispiel
 
-'''
+```
 string meineZeichenfolge;
 string zeichenfolgeMitWertzuweisung = "asdf";
 int zahl1;
 int zahlMitWertZuweisung = 5;
-'''
+```
 
 ## Implizite Deklaration
 
@@ -19,10 +31,10 @@ Bei der Impliziten Deklaration wird das Schlüsselwort var verwendet. Es muss ei
 
 Beispiel
 
-'''
+```
 var meineZeichenfolge = "asdf";
 var meineZahl = 5;
-'''
+```
 
 # Ausgabe auf der Konsole
 
@@ -78,43 +90,42 @@ Aufgabe 03-03-2026
 
 Vorgabe:
 
-'''c#
+```c#
 string projectName = "ACME";
 
 string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
-'''
+```
 
 Gewünschte Ausgabe:
 
-'''
+```
 View English output:
   c:\Exercise\ACME\data.txt
 
 Посмотреть русский вывод:
   c:\Exercise\ACME\ru-RU\data.txt
-'''
+```
 
 Lösung:
 
-'''c#
+```c#
 string projectName = "ACME";
 
 string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
 
 Console.WriteLine($"View English output:\n  c:\\Exercise\\{projectName}\\data.txt");
 Console.WriteLine($"\n{russianMessage}:\n  c:\\Exercise\\{projectName}\\ru-Ru\\data.txt");
-'''
+``
 
 # Methoden
-public / private
+public / private / protected
 static -> Methode kann aufgerufen werden ohne dass ein Object der Klasse erzeugt wurde
 void -> Methode hat keinen Rückgabewert
 
-// seed ist optional
+```c#
 // random object muss erst angelegt werden.
+// seed ist optional
 var random = new Random(seed)
-
-erzeugt random integer
-random.Next(min, max)
-// min inklusive
-// max 
+// erzeugt random integer min <= zahl < max 
+int randomNumber = random.Next(min, max)
+```
