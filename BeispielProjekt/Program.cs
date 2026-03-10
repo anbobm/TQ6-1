@@ -11,6 +11,7 @@ internal class Program
         // IfElse();
         // Switch();
         // Begrüßung("Max");
+        // AufagbeArray();
     }
 
 
@@ -139,4 +140,21 @@ internal class Program
                 break;
         }
     }
+    static void AufagbeArray()
+    {
+        Random rnd = new Random();
+
+        int[] zahlen = new int[30];
+
+        for (int i = 0; i < zahlen.Length; i++)
+        {
+            zahlen[i] = rnd.Next(1, 101);
+        }
+
+        for (int i = 0; i < zahlen.Length; i++)
+        {
+            Console.WriteLine(zahlen[i]);
+        }
+    }
 }
+
