@@ -115,7 +115,7 @@ string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\
 
 Console.WriteLine($"View English output:\n  c:\\Exercise\\{projectName}\\data.txt");
 Console.WriteLine($"\n{russianMessage}:\n  c:\\Exercise\\{projectName}\\ru-Ru\\data.txt");
-``
+```
 
 # Methoden
 public / private / protected
@@ -125,7 +125,18 @@ void -> Methode hat keinen Rückgabewert
 ```c#
 // random object muss erst angelegt werden.
 // seed ist optional
-var random = new Random(seed)
+var random = new Random(seed);
 // erzeugt random integer min <= zahl < max 
-int randomNumber = random.Next(min, max)
+int randomNumber = random.Next(min, max);
 ```
+
+# Arrays
+
+Feste Länge
+Alle Elemente müssen den gleichen Datentyp haben.
+
+```c#
+int[] myArray = new int[3];
+int[] myArray2 = [1, 2, 3];
+```
+
