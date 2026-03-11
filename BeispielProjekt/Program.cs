@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 internal class Program
 {
@@ -11,9 +13,102 @@ internal class Program
         // IfElse();
         // Switch();
         // Begrüßung("Max");
-        // AufagbeArray();
+        // Lösung();
+        // Arrays();
+        // Linq();
+        // ArraySort();
     }
 
+    private static void ArraySort()
+    {
+        int[] grades = new int[]{78, 92, 99, 37, 81};
+
+        Array.Sort(grades);
+
+        foreach(int number in grades){
+            Console.Write(number + ", ");
+        }
+        //Output: 37, 78, 81, 92, 99
+
+    }
+
+    private static void Linq()
+    {
+        int[] grades = {78, 92, 99, 37, 81};
+        int min = grades.Min();
+        int sum = grades.Sum();
+        var avg = grades.Average();
+
+        Console.WriteLine($"The sum of the grades is {sum}. The smallest grade is {min}. The average is {avg}");
+    }
+
+    static void Arrays()
+    {
+        int[] zahlen = new int[30];
+        var random = new Random();
+
+        for(int i = 0; i < zahlen.Length; i++)
+        {
+            zahlen[i] = random.Next(1, 101);
+        }
+
+        foreach(var zahl in zahlen)
+        {
+            Console.Write($"{zahl}, ");
+        }
+    }
+
+    static void Lösung()
+    {
+        // Schreibe ein Programm, welches eine Zahl vom Benutzer einliest (z.B. 5)
+        // und dann folgende Ausgabe erzeugt:
+        // (1 + 2 + 3 + 4 + 5) * 2 = 30
+        // Schreibe das Programm einmal mit einer for-Schleife und
+        // einmal mit einer while-Schleife.
+
+        Console.WriteLine("Gib Zahl!");
+        var zahl = Convert.ToInt32(Console.ReadLine());
+
+        // Alternative 1 mit for
+        // var summe = 0;
+        // Console.Write("(");
+        // for(int i = 1; i <= zahl; i++)
+        // {
+        //     if (i > 1)
+        //     {
+        //         Console.Write(" + ");
+        //     }
+        //     Console.Write(i);
+        //     summe += i;
+        // }
+        // Console.WriteLine($") * 2 = {summe * 2}");
+
+        // Alternative 2 mit for
+        // var summe = 0;
+        // var liste = new List<string>();
+        // for(int i = 1; i <= zahl; i++)
+        // {
+        //     liste.Add(i.ToString());
+        //     summe += i;
+        // }
+        // Console.WriteLine($"({string.Join(" + ", liste)}) * 2 = {summe * 2}");
+
+        // Alternative 3 mit while
+        var summe = 0;
+        Console.Write("(");
+        int i = 1;
+        while(i <= zahl)
+        {
+            if (i > 1)
+            {
+                Console.Write(" + ");
+            }
+            Console.Write(i);
+            summe += i;
+            i++;
+        }
+        Console.WriteLine($") * 2 = {summe * 2}");
+    }
 
     static void Klassenbibliothek()
     {
