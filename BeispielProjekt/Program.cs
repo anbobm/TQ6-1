@@ -14,7 +14,32 @@ internal class Program
         // Switch();
         // Begrüßung("Max");
         // Lösung();
-        Arrays();
+        // Arrays();
+        Linq();
+        ArraySort();
+    }
+
+    private static void ArraySort()
+    {
+        int[] grades = new int[]{78, 92, 99, 37, 81};
+
+        Array.Sort(grades);
+
+        foreach(int number in grades){
+            Console.Write(number + ", ");
+        }
+        //Output: 37, 78, 81, 92, 99
+
+    }
+
+    private static void Linq()
+    {
+        int[] grades = {78, 92, 99, 37, 81};
+        int min = grades.Min();
+        int sum = grades.Sum();
+        var avg = grades.Average();
+
+        Console.WriteLine($"The sum of the grades is {sum}. The smallest grade is {min}. The average is {avg}");
     }
 
     static void Arrays()
