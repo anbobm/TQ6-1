@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Microsoft.VisualBasic;
 
 internal class Program
 {
@@ -15,8 +16,100 @@ internal class Program
         // Begrüßung("Max");
         // Lösung();
         // Arrays();
-        Linq();
-        ArraySort();
+        // Linq();
+        // ArraySort();
+        // Dictionaries();
+        // Tupel();
+        // Exceptions();
+        Überschreiben();
+    }
+
+    static void Überschreiben()
+    {
+        Fahrzeug auto = new Auto();
+        auto.Fahren();
+    }
+
+    class Fahrzeug
+    {
+        public virtual void Fahren()
+        {
+            System.Console.WriteLine("Das Fahrzeug fährt");
+        }
+    }
+
+    class Auto : Fahrzeug
+    {
+        public override void Fahren()
+        {
+            System.Console.WriteLine("Das Auto fährt");
+        }
+    }
+
+    static void Exceptions()
+    {
+        try
+        {
+            // Convert.ToInt32("foobar");
+            int NULL = 0;
+            var foo = 1 / NULL;
+        }
+        catch(FormatException)
+        {
+            Console.WriteLine("String war nicht in einem korrekten Format");
+        }
+    }
+
+    static void Tupel()
+    {
+        var person = ("Alice", 30, "Dorfweg 1, 01234 Dorf");
+
+        Console.WriteLine(person.Item1);
+        Console.WriteLine(person.Item2);
+        Console.WriteLine(person.Item3);
+
+        person.Item1 = "Max";
+
+        Console.WriteLine(person);
+
+        var person2 = GetPerson();
+    }
+
+    static (string, int)  GetPerson()
+    {
+        return ("Bob", 25);
+    }
+
+    private static void Dictionaries()
+    {
+        var dict = new Dictionary<string, int>();
+        dict["foo"] = 1234;
+        dict.Add("bar", 6789);
+
+        var dict2 = new Dictionary<string, string>()
+        {
+            {"foo", "bar"},
+            {"bla", "blub"}
+        };
+
+        var ausgelesenerWert = dict["foo"];
+
+        int wert = 5;
+
+        dict.ContainsKey("asdasdasd");
+        dict.TryGetValue("asdasdasd", out wert);
+
+        System.Console.WriteLine(wert);
+
+
+
+        // KeyNotFoundException
+        // Console.WriteLine(dict["bar"]);
+
+        foreach(var values in dict.Values)
+        {
+            Console.WriteLine($"Wert: {values}");
+        }
     }
 
     private static void ArraySort()
