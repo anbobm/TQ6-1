@@ -2,28 +2,98 @@
 
 //Message.renderRolls(Dice.rollMany(5));
 
-var gameController = new GameController();
-Message.renderScoreSheet(gameController.ScoreSheet);
-Message.renderTurnOptions(gameController.Turn, gameController.Rolls);
+//var gameController = new GameController();
+//Message.renderScoreSheet(gameController.ScoreSheet);
+//Message.renderTurnOptions(gameController.Turn, gameController.Rolls);
 
-while(true){
-    string userInput = "";
-    Console.Write("Deine Wahl? ");
-    string? userInputRaw = Console.ReadLine();
-    if(userInputRaw != null){
-        userInput = userInputRaw.Trim().ToLower();
-    }
-    switch(userInput){
-        case "r":
-            if(gameController(checkLegalChoice())){
-                gameController.rollDices();
+var uiController = new UIController();
+uiController.InitGame();
+
+class UIController(){
+
+    private string? UserInputRaw = "";
+    private string UserInput = "";
+    private GameController GameController = new GameController();
+
+    public void GameLoop(){
+        //bool endOfGame = false;
+
+        while(!GameController.EndOfGame){
+            Message.RenderGameState(GameController);
+            Message.RenderOptions(GameController);
+            UserInputRaw = Console.ReadLine();
+            if(UserInputRaw != null){
+                UserInput = UserInputRaw.Trim().ToLower();
             }
-        case "q":
-            break
+
+            bool validChoice = GameController.ExecuteChoice(UserInput);
+            if(!validChoice){
+                Message.InputError();
+            }
+        }
     }
-    if(userInput == "q"){
-        break;
+
+    public void InitGame(){
+        Message.Greeting();
+
+        int playerCount = ReadPlayerCount();
+        string[] playerNames = new string[playerCount];
+
+        for(int i=0; i<playerCount; i+=1){
+            playerNames[i] = ReadPlayerName(i);
+        }
+
+        GameController.PlayersAdd(playerNames);
+        GameLoop();
     }
+
+    private string ReadPlayerName(int playerIndex){
+        bool validPlayerName = false;
+        string playerName = "";
+
+        while(!validPlayerName){
+            Message.PlayerName(playerIndex);
+            UserInputRaw = Console.ReadLine();
+            if(UserInputRaw != null){
+                UserInput = UserInputRaw;
+            }
+            if(UserInput != "" && UserInput.Length <= 10){
+                playerName = UserInput;
+                break;
+            }
+            if(UserInput == ""){
+                Message.EmptyPlayerNameError();
+            }
+            if(UserInput.Length > 10){
+                Message.LongPlayerNameError();
+            }
+        }
+        return playerName;
+    }
+
+    private int ReadPlayerCount(){
+        bool validPlayerCount = false;
+        int playerCount = 0;
+
+        while(!validPlayerCount){
+            Message.PlayerCount();
+            UserInputRaw = Console.ReadLine();
+            if(UserInputRaw != null){
+                UserInput = UserInputRaw;
+            }
+            if(int.TryParse(UserInput, out playerCount)){
+                if(playerCount > 0 && playerCount <= 4){
+                    validPlayerCount = true;
+                }else{
+                    Message.InputError();
+                }
+            }else{
+                Message.InputError();
+            } 
+        }
+        return playerCount;
+    }
+
 }
 
 class Score {
@@ -38,24 +108,162 @@ class Score {
 }
 
 class Player {
-    public string Name {get; set;}
-    public ScoreSheet ScoreSheet {get; set;} = new ScoreSheet()
+    public string Name {get; set;} = "";
+    public ScoreSheet ScoreSheet {get; set;} = new ScoreSheet();
+
+    public Player(string name){
+        Name = name;
+    }
 }
 
 class GameController {
-    public ScoreSheet ScoreSheet = new ScoreSheet();
-    public int Turn = 1;
-    public int Rolls = 0;
+    public List<Player> Players {get; set;} = new List<Player>();
+    public int Turn {get; set;} = 1;
+    private int ActivePlayerIndex {get; set;} = 0;
+    public int RollCount {get; set;} = 0;
+    public int[] Roll = {1, 1, 1, 1, 1};
+    public bool EndOfGame {get; set;} = false;
+
+    public bool ExecuteChoice(string choice){
+        if(RollCount == 0 && choice == "w"){
+            return rollAll();
+        }
+
+        if(RollCount !=3 && choice == "w"){
+            return rollAll();
+        }
+
+        if(RollCount != 3 && choice != "x"){
+            return rollSpecific(choice);
+        }
+
+        if(RollCount != 3 && choice == "x"){
+            RollCount = 3;
+            return true;
+        }
+
+        return ScoreRoll(choice);
+/*
+        if(RollCount == 3){
+
+        }
+*/
+        return false;
+    }
+
+    private bool ScoreRoll(choice){
+        //TODO: CONTINUE HERE
+    }
+
+    private bool rollAll(){
+        List<int> rollList = Dice.RollMany(5);
+        for(int i=0; i<5; i+=1){
+            Roll[i] = rollList[i];
+        }
+        RollCount += 1;
+        return true;
+    }
+
+    private bool rollSpecific(string choice){
+        string[] validOptions = ["w1", "w2", "w3", "w4", "w5"];
+        string[] diceChoosen = choice.Split(' ');
+        if(diceChoosen.Length > 5){
+            return false;
+        }
+        foreach(string diceName in diceChoosen){
+            if(!validOptions.Contains(diceName)){
+                return false;
+            }
+        }
+        
+        foreach(string diceName in diceChoosen){
+            int diceIndex = int.Parse(diceName[1].ToString())-1;
+            Roll[diceIndex] = Dice.RollOne();
+        }
+        RollCount += 1;
+        return true;
+    }
+
+    public void PlayersAdd(string[] names){
+        foreach(string name in names){
+            Players.Add(new Player(name));
+        }
+    }
+
+    public string ActivePlayerName{
+        get {return Players[ActivePlayerIndex].Name;}
+    }
+
+    public ScoreSheet ActivePlayerScore{
+        get {return Players[ActivePlayerIndex].ScoreSheet;}
+    }
+    
 }
 
 class Message {
     public static List<string> DiceSymbols = new List<string>(["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]);
 
-    public static void renderRolls(List<int>rolls){
-        Console.WriteLine(string.Join(" ", rolls));
+    public static void RenderGameState(GameController gameController){
+        Console.WriteLine($"{gameController.ActivePlayerName} ist am Zug");
+        RenderScoreSheet(gameController.ActivePlayerScore);
+        if(gameController.RollCount > 0){
+            RenderRoll(gameController.Roll);
+        }
     }
 
-    public static void renderScoreSheet(ScoreSheet scoreSheet){
+    public static void RenderOptions(GameController gameController){
+        Console.WriteLine("Deine Möglichkeiten: ");
+        if(gameController.RollCount == 0){
+            Console.WriteLine("[W] Würfeln");
+            Console.Write("Deine Wahl: ");
+        }
+
+        if(gameController.RollCount > 0 && gameController.RollCount < 3){
+            Console.WriteLine("Gib die Namen der Würfel ein, die du nochmal würfeln möchtest. Bsp.:[W1 W3]");
+            Console.WriteLine("[W] Alle Würfel nochmal würfeln.");
+            Console.WriteLine("[X] Wurf eintragen und Zug beenden.");
+            Console.Write("Deine Wahl: ");
+        }
+
+        if(gameController.RollCount == 3){
+            Console.WriteLine("Wo möchtest du deinen Wurf eintragen?");
+            Console.Write("Deine Wahl: ");
+        }
+    }
+
+    public static void LongPlayerNameError(){
+        Console.WriteLine("Ungültige Eingabe: Spielername darf maximal 10 Zeichen lang sein.");
+    }
+
+    public static void EmptyPlayerNameError(){
+        Console.WriteLine("Ungültige Eingabe: Spielername darf nicht leer sein.");
+    }
+
+    public static void PlayerName(int playerIndex){
+        Console.Write($"Bitte gib einen Namen für Spieler {playerIndex + 1} ein: ");
+    }
+
+    public static void PlayerCount(){
+        Console.Write("Bitte gib die Anzahl an Mitspielern ein (1-4): ");
+    }
+
+    public static void InputError(){
+        Console.WriteLine("Ungültige Eingabe -_-");
+    }
+
+    public static void RenderRoll(int[] roll){
+        Console.WriteLine("|W1|W2|W3|W4|W5|");
+        string symbols = "|";
+        string eyes = "|";
+        foreach(int dice in roll){
+            symbols += $"{DiceSymbols[dice-1]} |";
+            eyes += $"{dice} |";
+        }
+        Console.WriteLine(symbols);
+        Console.WriteLine(eyes);
+    }
+
+    public static void RenderScoreSheet(ScoreSheet scoreSheet){
         int optionCounter = 1;
         foreach(Score score in scoreSheet.Score){
             if(optionCounter==7){
@@ -84,17 +292,21 @@ class Message {
         }
     }
 
+    public static void Greeting(){
+        Console.WriteLine("Definetly not Kniffel");
+        Console.WriteLine("Herzlich Willkommen!");
+    }
 }
 
 class Dice {
     public static Random random {get; set;} = new Random();
-    public static int rollOne(){
+    public static int RollOne(){
         return random.Next(1, 7);
     }
-    public static List<int> rollMany(int amount){
+    public static List<int> RollMany(int amount){
         List<int> rolls = new List<int>();
         for(int i=0; i<amount; i+=1){
-            rolls.Add(rollOne());
+            rolls.Add(RollOne());
         }
         return rolls;
     }
@@ -102,24 +314,7 @@ class Dice {
 
 class Turn {
     public int tries {get; set;} = 0;
-    public List<List<int>> rolls {get; set;} = [];
-
-    public string currentRoll(){
-        List<string> dices = new List<string>(["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]);
-        string currRoll = "";
-        foreach(int val in rolls){
-            currRoll += $"{dices[val-1]} ";
-        }
-        return currRoll;
-    }
-
-    public List<int> rollAll(){
-        var random = new Random();
-        for(int i=0; i<5; i+=1){
-            rolls.Add(random.Next(1, 7));
-        }
-        return rolls;
-    }
+    public List<int> roll {get; set;} = [];
 }
 
 class ScoreSheet {
@@ -153,20 +348,5 @@ class ScoreSheet {
         Score[eyes-1].Open = false;
         return Score[eyes-1].Points;
     }
-
-
 }
 
-//List<Int32> = new List(Int32);
-//core.Add(5);
-
-
-
-
-/*
-class ScoreSheet {
-    list score = new List(Int32)
-}
-
-Console.WriteLine("[1]: 1er:")
-*/
