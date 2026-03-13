@@ -1,11 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
-//Message.renderRolls(Dice.rollMany(5));
-
-//var gameController = new GameController();
-//Message.renderScoreSheet(gameController.ScoreSheet);
-//Message.renderTurnOptions(gameController.Turn, gameController.Rolls);
-
 var uiController = new UIController();
 uiController.InitGame();
 
@@ -16,8 +9,6 @@ class UIController(){
     private GameController GameController = new GameController();
 
     public void GameLoop(){
-        //bool endOfGame = false;
-
         while(!GameController.EndOfGame){
             Message.RenderGameState(GameController);
             Message.RenderOptions(GameController);
@@ -25,12 +16,15 @@ class UIController(){
             if(UserInputRaw != null){
                 UserInput = UserInputRaw.Trim().ToLower();
             }
-
             bool validChoice = GameController.ExecuteChoice(UserInput);
             if(!validChoice){
                 Message.InputError();
             }
         }
+
+        Message.RenderEndOfGame(GameController);
+
+        // ENDOFGAMEMESSAGE HERE
     }
 
     public void InitGame(){
@@ -143,16 +137,47 @@ class GameController {
         }
 
         return ScoreRoll(choice);
-/*
-        if(RollCount == 3){
 
-        }
-*/
-        return false;
     }
 
-    private bool ScoreRoll(choice){
-        //TODO: CONTINUE HERE
+    private bool ScoreRoll(string choice){
+        int parsedValue = 0;
+        bool validInt = int.TryParse(choice, out parsedValue);
+        if(!validInt){return false;}
+        if(parsedValue < 1 || parsedValue > 13){return false;}
+
+        bool scoreSaved = false;
+        if(parsedValue <= 6){
+            scoreSaved = ActivePlayerScore.ScoreUpper(Roll, parsedValue);
+        }
+
+        if(parsedValue > 6){
+            scoreSaved = ActivePlayerScore.ScoreLower(Roll, parsedValue);
+        }
+
+        if(!scoreSaved){
+            return false;
+        }
+
+        RollCount = 0;
+
+        if(Turn == 13 && ActivePlayerIndex == Players.Count - 1){
+            EndOfGame = true;
+            return true;
+        }
+
+        if(ActivePlayerIndex == Players.Count - 1){
+            ActivePlayerIndex = 0;
+            Turn += 1;
+            return true;
+        }
+
+        if(ActivePlayerIndex != Players.Count -1){
+            ActivePlayerIndex += 1;
+            return true;
+        }
+
+        return false; 
     }
 
     private bool rollAll(){
@@ -167,9 +192,11 @@ class GameController {
     private bool rollSpecific(string choice){
         string[] validOptions = ["w1", "w2", "w3", "w4", "w5"];
         string[] diceChoosen = choice.Split(' ');
+
         if(diceChoosen.Length > 5){
             return false;
         }
+
         foreach(string diceName in diceChoosen){
             if(!validOptions.Contains(diceName)){
                 return false;
@@ -180,6 +207,7 @@ class GameController {
             int diceIndex = int.Parse(diceName[1].ToString())-1;
             Roll[diceIndex] = Dice.RollOne();
         }
+
         RollCount += 1;
         return true;
     }
@@ -203,6 +231,17 @@ class GameController {
 class Message {
     public static List<string> DiceSymbols = new List<string>(["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]);
 
+    public static void RenderEndOfGame(GameController gameController){
+        var ranking = gameController.Players.OrderByDescending(player => player.ScoreSheet.Conclusion[4].Points).ToList();
+        Console.WriteLine($"Herzlichen Glückwunsch {ranking[0].Name}");
+        Console.WriteLine("Endstand:");
+        int rank = 1;
+        foreach(var player in ranking){
+            Console.WriteLine($"{rank}. {player.Name} - {player.ScoreSheet.Conclusion[4].Points} Punkte");
+            rank += 1;
+        }
+    }
+
     public static void RenderGameState(GameController gameController){
         Console.WriteLine($"{gameController.ActivePlayerName} ist am Zug");
         RenderScoreSheet(gameController.ActivePlayerScore);
@@ -219,8 +258,7 @@ class Message {
         }
 
         if(gameController.RollCount > 0 && gameController.RollCount < 3){
-            Console.WriteLine("Gib die Namen der Würfel ein, die du nochmal würfeln möchtest. Bsp.:[W1 W3]");
-            Console.WriteLine("[W] Alle Würfel nochmal würfeln.");
+            Console.WriteLine("[W1..W6] Nochmal Würfeln.");
             Console.WriteLine("[X] Wurf eintragen und Zug beenden.");
             Console.Write("Deine Wahl: ");
         }
@@ -265,31 +303,26 @@ class Message {
 
     public static void RenderScoreSheet(ScoreSheet scoreSheet){
         int optionCounter = 1;
+        //bool upperPartDone = false;
         foreach(Score score in scoreSheet.Score){
-            if(optionCounter==7){
-                Console.WriteLine($"{scoreSheet.Conclusion[0].Name} \t\t {scoreSheet.Conclusion[0].Points}");
-                Console.WriteLine($"{scoreSheet.Conclusion[1].Name} \t\t\t {scoreSheet.Conclusion[1].Points}");
-                Console.WriteLine($"{scoreSheet.Conclusion[2].Name} \t\t\t {scoreSheet.Conclusion[2].Points}");
-                optionCounter += 1;
-                continue;
+            //if(optionCounter == 7 && !upperPartDone){
+            if(optionCounter == 7){
+                Console.WriteLine($"{scoreSheet.Conclusion[0].Name}\t\t\t{scoreSheet.Conclusion[0].Points.ToString().PadLeft(3, ' ')}");
+                Console.WriteLine($"{scoreSheet.Conclusion[1].Name}\t\t\t\t{scoreSheet.Conclusion[1].Points.ToString().PadLeft(3, ' ')}");
+                Console.WriteLine($"{scoreSheet.Conclusion[2].Name}\t\t\t\t{scoreSheet.Conclusion[2].Points.ToString().PadLeft(3, ' ')}");
+                //upperPartDone = true;
             }
-            string scoreMsg = $"[{optionCounter.ToString().PadLeft(2, ' ')}] {score.Name}";
-            if(score.Name.Length < 10){scoreMsg += "\t\t\t";}
-            if(score.Name.Length >= 10){scoreMsg += "\t\t";}
-            if(!score.Open){scoreMsg += score.Points; } 
+            
+            string scoreMsg = $"[{optionCounter.ToString().PadLeft(2, ' ')}] {score.Name.PadRight(11-score.Name.Length, ' ')}";
+            if(score.Name.Length <= 10){scoreMsg += "\t\t\t";}
+            if(score.Name.Length > 10){scoreMsg += "\t\t";}
+            if(!score.Open){scoreMsg += score.Points.ToString().PadLeft(3, ' '); } 
             
             Console.WriteLine(scoreMsg);
             optionCounter += 1;
         }
-        Console.WriteLine($"{scoreSheet.Conclusion[3].Name} \t\t {scoreSheet.Conclusion[3].Points}");
-        Console.WriteLine($"{scoreSheet.Conclusion[4].Name} \t\t\t {scoreSheet.Conclusion[4].Points}");
-    }
-
-    public static void renderTurnOptions(int turn, int roll){
-        if(roll == 0){
-            Console.WriteLine("[R]: Würfeln");
-            Console.WriteLine("[Q]: Beenden");
-        }
+        Console.WriteLine($"{scoreSheet.Conclusion[3].Name}\t\t\t{scoreSheet.Conclusion[3].Points.ToString().PadLeft(3, ' ')}");
+        Console.WriteLine($"{scoreSheet.Conclusion[4].Name}\t\t\t\t{scoreSheet.Conclusion[4].Points.ToString().PadLeft(3, ' ')}");
     }
 
     public static void Greeting(){
@@ -312,11 +345,6 @@ class Dice {
     }
 }
 
-class Turn {
-    public int tries {get; set;} = 0;
-    public List<int> roll {get; set;} = [];
-}
-
 class ScoreSheet {
     public List<Score> Score = new List<Score>{
         new Score("⚀ ⚀ ⚀", 0),
@@ -330,23 +358,320 @@ class ScoreSheet {
         new Score("Full-House", 0),
         new Score("Kl. Straße", 0),
         new Score("Gr. Straße", 0),
-        new Score("Gr. Kniffel", 0),
+        new Score("Kniffel", 0),
+        new Score("Chance", 0),
     };
 
     public List<Score> Conclusion = new List<Score>{
-        new Score("P. Oben", 0),
+        new Score("Punkte Oben", 0),
         new Score("Bonus", 0),
         new Score("Total", 0),
-        new Score("P. Unten", 0),
+        new Score("Punkte Unten", 0),
         new Score("Total", 0),
     };
 
-    public int scoreUpper(List<int>roll, int eyes){
+    public bool ScoreUpper(int[] roll, int eyes){
+        if(!Score[eyes-1].Open){return false;}
         foreach(int dice in roll){
-            Score[eyes-1].Points += dice;
+            if(eyes == dice){Score[eyes-1].Points += dice;}
         }
         Score[eyes-1].Open = false;
-        return Score[eyes-1].Points;
+        updateConclusion();
+        return true;
     }
-}
 
+    public bool ScoreLower(int[] roll, int choice){
+        bool scoreSaved = false;
+        switch(choice){
+            case 7:
+                scoreSaved = Score3OfAKind(roll);
+                break;
+            case 8:
+                scoreSaved = Score4OfAKind(roll);
+                break;
+            case 9:
+                scoreSaved = ScoreFullHouse(roll);
+                break;
+            case 10:
+                scoreSaved = ScoreShortStraight(roll);
+                break;
+            case 11:
+                scoreSaved = ScoreLongStraight(roll);
+                break;
+            case 12:
+                scoreSaved = Score5OfAKind(roll);
+                break;
+            case 13:
+                scoreSaved = ScoreChance(roll);
+                break;
+        }
+        updateConclusion();
+        return scoreSaved;
+    }
+
+    private bool ScoreChance(int[] roll){
+        if(!Score[12].Open){return false;}
+        foreach(int dice in roll){Score[12].Points += dice;}
+        Score[12].Open = false;
+        return true; 
+    }
+
+    private bool Score5OfAKind(int[] roll){
+        if(!Score[11].Open){return false;}
+        Dictionary<int, int> eyeDict = new Dictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool valid5OfAKind = false;
+        foreach(var kvp in eyeDict){
+            if(kvp.Value > 4){
+                valid5OfAKind = true;
+                break;
+            }
+        }
+
+        if(!valid5OfAKind){
+            Score[11].Points = 0;
+            Score[11].Open = false;
+            return true;
+        }
+
+        Score[11].Points = 50;
+        Score[11].Open = false;
+        return true;
+    }
+
+    private bool ScoreLongStraight(int[] roll){
+        if(!Score[10].Open){return false;}
+        SortedDictionary<int, int> eyeDict = new SortedDictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool validStraight = false;
+        int straightCounter = 0;
+
+        foreach(var kvp in eyeDict){
+            if(kvp.Value > 0){straightCounter += 1;}
+            if(straightCounter > 4){
+                validStraight = true;
+                break;
+            }
+            if(kvp.Value == 0){straightCounter = 0;}
+        }
+
+        if(!validStraight){
+            Score[10].Points = 0;
+            Score[10].Open = false;
+            return true;
+        }
+
+        Score[10].Points = 40; 
+        Score[10].Open = false;
+        return true;
+    }
+
+
+    private bool ScoreShortStraight(int[] roll){
+        if(!Score[9].Open){return false;}
+        SortedDictionary<int, int> eyeDict = new SortedDictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool validStraight = false;
+        int straightCounter = 0;
+
+        foreach(var kvp in eyeDict){
+            if(kvp.Value > 0){straightCounter += 1;}
+            if(straightCounter > 3){
+                validStraight = true;
+                break;
+            }
+            if(kvp.Value == 0){straightCounter = 0;}
+        }
+
+        if(!validStraight){
+            Score[9].Points = 0;
+            Score[9].Open = false;
+            return true;
+        }
+
+        Score[9].Points = 30; 
+        Score[9].Open = false;
+        return true;
+    }
+
+    private bool ScoreFullHouse(int[] roll){
+        if(!Score[8].Open){return false;}
+        Dictionary<int, int> eyeDict = new Dictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool validFullHouse = false;
+        bool found3OfAKind = false;
+        bool foundPair = false;
+        bool found5OfAKind = false;
+
+        foreach(var kvp in eyeDict){
+            if(kvp.Value == 3){
+                found3OfAKind = true;
+            }
+            if(kvp.Value == 2){
+                foundPair = true;
+            }
+            if(kvp.Value > 4){
+                found5OfAKind = true;
+            }
+        }
+
+        if((found3OfAKind && foundPair) || found5OfAKind){
+            validFullHouse = true;
+        }
+
+        if(!validFullHouse){
+            Score[8].Points = 0;
+            Score[8].Open = false;
+            return true;
+        }
+
+        Score[8].Points = 25; 
+        Score[8].Open = false;
+        return true;
+    }
+
+    private bool Score4OfAKind(int[] roll){
+        if(!Score[7].Open){return false;}
+        Dictionary<int, int> eyeDict = new Dictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool valid4OfAKind = false;
+        foreach(var kvp in eyeDict){
+            if(kvp.Value > 3){
+                valid4OfAKind = true;
+                break;
+            }
+        }
+
+        if(!valid4OfAKind){
+            Score[7].Points = 0;
+            Score[7].Open = false;
+            return true;
+        }
+
+        foreach(int dice in roll){
+            Score[7].Points += dice;
+        }
+        
+        Score[7].Open = false;
+        return true;
+    }
+
+
+    private bool Score3OfAKind(int[] roll){
+        if(!Score[6].Open){return false;}
+        Dictionary<int, int> eyeDict = new Dictionary<int, int> {
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0},
+            {6, 0},
+        };
+
+        foreach(var key in eyeDict.Keys.ToList()){
+            int count = roll.Count(x => x==key);
+            eyeDict[key] = count;
+        }
+
+        bool valid3OfAKind = false;
+        foreach(var kvp in eyeDict){
+            if(kvp.Value > 2){
+                valid3OfAKind = true;
+                break;
+            }
+        }
+
+        if(!valid3OfAKind){
+            Score[6].Points = 0;
+            return true;
+        }
+
+        foreach(int dice in roll){
+            Score[6].Points += dice;
+        }
+        
+        Score[6].Open = false;
+        return true;
+    }
+
+    private void updateConclusion(){
+        int upperPoints = 0;
+        for(int i=0; i<6; i+=1){
+           upperPoints += Score[i].Points;
+        }
+        Conclusion[0].Points = upperPoints;
+        if(upperPoints >= 63){Conclusion[1].Points = 35;}
+        Conclusion[2].Points = Conclusion[0].Points + Conclusion[1].Points;
+        int lowerPoints = 0;
+        for(int i=6; i<Score.Count; i+=1){
+            lowerPoints += Score[i].Points;
+        }
+        Conclusion[3].Points = lowerPoints;
+        int total = 0;
+        for(int i=0; i<4; i+=1){
+            if(i==2){continue;}
+            total += Conclusion[i].Points;
+        }
+        Conclusion[4].Points = total;
+    } 
+}
