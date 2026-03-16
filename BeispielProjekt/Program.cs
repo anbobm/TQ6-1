@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Collections;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Microsoft.VisualBasic;
@@ -21,29 +22,61 @@ internal class Program
         // Dictionaries();
         // Tupel();
         // Exceptions();
-        Überschreiben();
+        // Vererbung();
+        ArraySortWithComparer();
     }
 
-    static void Überschreiben()
+    static void ArraySortWithComparer()
     {
-        Fahrzeug auto = new Auto();
-        auto.Fahren();
-    }
+        Mitarbeiter[] array = [new Mitarbeiter(11), new Mitarbeiter(1000),
+        new Mitarbeiter(10000000), new Mitarbeiter(0)];
 
-    class Fahrzeug
-    {
-        public virtual void Fahren()
+        // Funktioniert, wenn Mitarbeiter IComparable implementiert
+        Array.Sort(array);
+
+        // Funktioniert mit übergebenem Comparer
+        Array.Sort(array, new MitarbeiterComparer());
+        
+        foreach(var el in array)
         {
-            System.Console.WriteLine("Das Fahrzeug fährt");
+            Console.WriteLine(el.Gehalt);
         }
     }
 
-    class Auto : Fahrzeug
+    class Mitarbeiter : IComparable<Mitarbeiter>
     {
-        public override void Fahren()
+        public int Gehalt { get; set; }
+
+        public Mitarbeiter(int gehalt)
         {
-            System.Console.WriteLine("Das Auto fährt");
+            Gehalt = gehalt;
         }
+
+        public int CompareTo(Mitarbeiter? other)
+        {
+            return this.Gehalt - other.Gehalt;
+        }
+    }
+
+    class MitarbeiterComparer : IComparer<Mitarbeiter>
+    {
+        public int Compare(Mitarbeiter? x, Mitarbeiter? y)
+        {
+            return x.Gehalt - y.Gehalt;
+        }
+    }
+
+    static void Vererbung()
+    {
+        var fahrzeug1 = new Fahrzeug("emma maersk", "grün");
+        fahrzeug1.Fahren();
+        Console.WriteLine(fahrzeug1.Geschwindigkeit);
+        fahrzeug1.Geschwindigkeit = -100;
+        Console.WriteLine(fahrzeug1.Geschwindigkeit);
+
+        var auto1 = new Auto("Opel", "schwarz");
+        auto1.Hupen();
+        auto1.Fahren();
     }
 
     static void Exceptions()
