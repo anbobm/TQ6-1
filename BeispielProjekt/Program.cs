@@ -1,9 +1,4 @@
-﻿using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Microsoft.VisualBasic;
-
-internal class Program
+﻿internal class Program
 {
     private static void Main(string[] args)
     {
@@ -21,29 +16,125 @@ internal class Program
         // Dictionaries();
         // Tupel();
         // Exceptions();
-        // Überschreiben();
+        // Vererbung();
+        // ArraySortWithComparer();
+        // PasswortStärke();
+        // PasswortStärke();
+        //PrintTextStats("Hallo Welt von C#");
     }
 
-    static void Überschreiben()
+    static int CountLetters(string text, bool countSpaces = false)
     {
-        Fahrzeug auto = new Auto();
-        auto.Fahren();
-    }
-
-    class Fahrzeug
-    {
-        public virtual void Fahren()
+        if (string.IsNullOrEmpty(text))
+            return 0;
+        
+        if (countSpaces)
+            return text.Length;
+        
+        // Zaehle alle Zeichen ausser Leerzeichen
+        int count = 0;
+        foreach (char c in text)
         {
-            System.Console.WriteLine("Das Fahrzeug fährt");
+            if (c != ' ')
+                count++;
+        }
+        return count;
+    }
+
+    static int CountVowels(string text, string vowels = "aeiouAEIOU")
+    {
+        if (string.IsNullOrEmpty(text))
+            return 0;
+        
+        int count = 0;
+        foreach (char c in text)
+        {
+            if (vowels.Contains(c))
+                count++;
+        }
+        return count;
+    }
+
+    static int CountWords(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return 0;
+
+    string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    return words.Length;
+    }
+
+    static void PrintTextStats(string text)
+    {
+        int letters = CountLetters(text);
+        int vowels = CountVowels(text);
+        int words = CountWords(text);
+
+        Console.WriteLine($"Buchstaben: {letters}");
+        Console.WriteLine($"Vokale: {vowels}");
+        Console.WriteLine($"Woerter: {words}");
+    }
+
+    static void PasswortStärke()
+    {
+        PasswortStärkePrüfer.PrintStrengthReport("a2sD!");
+        PasswortStärkePrüfer.PrintStrengthReport("a2saaafgdD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aasdassD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aaaaaaaaaaaaaa");
+        
+    }
+
+    static void ArraySortWithComparer()
+    {
+        Mitarbeiter[] array = [new Mitarbeiter(11), new Mitarbeiter(1000),
+        new Mitarbeiter(10000000), new Mitarbeiter(0)];
+
+        // Funktioniert, wenn Mitarbeiter IComparable implementiert
+        Array.Sort(array);
+
+        // Funktioniert mit übergebenem Comparer
+        Array.Sort(array, new MitarbeiterComparer());
+        
+        foreach(var el in array)
+        {
+            Console.WriteLine(el.Gehalt);
         }
     }
 
-    class Auto : Fahrzeug
+    class Mitarbeiter : IComparable<Mitarbeiter>
     {
-        public override void Fahren()
+        public int Gehalt { get; set; }
+
+        public Mitarbeiter(int gehalt)
         {
-            System.Console.WriteLine("Das Auto fährt");
+            Gehalt = gehalt;
         }
+
+        public int CompareTo(Mitarbeiter? other)
+        {
+            return this.Gehalt - other.Gehalt;
+        }
+    }
+
+    class MitarbeiterComparer : IComparer<Mitarbeiter>
+    {
+        public int Compare(Mitarbeiter? x, Mitarbeiter? y)
+        {
+            return x.Gehalt - y.Gehalt;
+        }
+    }
+
+    static void Vererbung()
+    {
+        var fahrzeug1 = new Fahrzeug("emma maersk", "grün");
+        fahrzeug1.Fahren();
+        Console.WriteLine(fahrzeug1.Geschwindigkeit);
+        fahrzeug1.Geschwindigkeit = -100;
+        Console.WriteLine(fahrzeug1.Geschwindigkeit);
+
+        var auto1 = new Auto("Opel", "schwarz");
+        auto1.Hupen();
+        auto1.Fahren();
     }
 
     static void Exceptions()
@@ -99,7 +190,7 @@ internal class Program
         dict.ContainsKey("asdasdasd");
         dict.TryGetValue("asdasdasd", out wert);
 
-        System.Console.WriteLine(wert);
+        Console.WriteLine(wert);
 
 
 
@@ -248,7 +339,7 @@ internal class Program
         // Explizit weil prinzipiell Datenverlust, so wie hier:
         große_zahl = 2_147_483_648;
         zahl = (int) große_zahl;
-        System.Console.WriteLine(zahl); // -2^31
+        Console.WriteLine(zahl); // -2^31
 
         // Implizierter Cast von int -> double
         zahl = 3218238;
@@ -290,19 +381,19 @@ internal class Program
 
         if (eingabe < 0)
         {
-            System.Console.WriteLine("Kleiner Null");
+            Console.WriteLine("Kleiner Null");
         }
         else if (eingabe == 42)
         {
-            System.Console.WriteLine("Die Antwort.");
+            Console.WriteLine("Die Antwort.");
         }
         else if (eingabe > 50)
         {
-            System.Console.WriteLine("Frührente");
+            Console.WriteLine("Frührente");
         }
         else
         {
-            System.Console.WriteLine(false);
+            Console.WriteLine(false);
         }
     }
 
