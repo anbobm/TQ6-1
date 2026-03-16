@@ -139,4 +139,3 @@ Alle Elemente müssen den gleichen Datentyp haben.
 int[] myArray = new int[3];
 int[] myArray2 = [1, 2, 3];
 ```
-
