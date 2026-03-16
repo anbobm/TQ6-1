@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Microsoft.VisualBasic;
-
-internal class Program
+﻿internal class Program
 {
     private static void Main(string[] args)
     {
@@ -23,7 +17,18 @@ internal class Program
         // Tupel();
         // Exceptions();
         // Vererbung();
-        ArraySortWithComparer();
+        // ArraySortWithComparer();
+        // PasswortStärke();
+        // PasswortStärke();
+    }
+
+    static void PasswortStärke()
+    {
+        PasswortStärkePrüfer.PrintStrengthReport("a2sD!");
+        PasswortStärkePrüfer.PrintStrengthReport("a2saaafgdD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aasdassD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aaaaaaaaaaaaaa");
+        
     }
 
     static void ArraySortWithComparer()
@@ -132,7 +137,7 @@ internal class Program
         dict.ContainsKey("asdasdasd");
         dict.TryGetValue("asdasdasd", out wert);
 
-        System.Console.WriteLine(wert);
+        Console.WriteLine(wert);
 
 
 
@@ -281,7 +286,7 @@ internal class Program
         // Explizit weil prinzipiell Datenverlust, so wie hier:
         große_zahl = 2_147_483_648;
         zahl = (int) große_zahl;
-        System.Console.WriteLine(zahl); // -2^31
+        Console.WriteLine(zahl); // -2^31
 
         // Implizierter Cast von int -> double
         zahl = 3218238;
@@ -323,19 +328,19 @@ internal class Program
 
         if (eingabe < 0)
         {
-            System.Console.WriteLine("Kleiner Null");
+            Console.WriteLine("Kleiner Null");
         }
         else if (eingabe == 42)
         {
-            System.Console.WriteLine("Die Antwort.");
+            Console.WriteLine("Die Antwort.");
         }
         else if (eingabe > 50)
         {
-            System.Console.WriteLine("Frührente");
+            Console.WriteLine("Frührente");
         }
         else
         {
-            System.Console.WriteLine(false);
+            Console.WriteLine(false);
         }
     }
 
