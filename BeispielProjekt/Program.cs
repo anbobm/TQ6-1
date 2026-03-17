@@ -20,6 +20,14 @@
         // ArraySortWithComparer();
         // PasswortStärke();
         // PasswortStärke();
+        // TextStatistik();
+    }
+
+    static void TextStatistik()
+    {
+        Console.WriteLine(TextStatistikTool.CountLetters("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountVowels("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountWords("Hallo  Welt von C#"));
     }
 
     static void PasswortStärke()
