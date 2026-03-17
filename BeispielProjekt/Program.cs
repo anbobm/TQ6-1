@@ -20,59 +20,68 @@
         // ArraySortWithComparer();
         // PasswortStärke();
         // PasswortStärke();
-        //PrintTextStats("Hallo Welt von C#");
+        // TextStatistik();
+        // NumberToolsTest();
+        TestAuto2();
     }
 
-    static int CountLetters(string text, bool countSpaces = false)
+    public class Auto2
     {
-        if (string.IsNullOrEmpty(text))
-            return 0;
-        
-        if (countSpaces)
-            return text.Length;
-        
-        // Zaehle alle Zeichen ausser Leerzeichen
-        int count = 0;
-        foreach (char c in text)
+        public string Marke { get; set; }
+        public string Modell { get; set; }
+        public int Baujahr { get; set; }
+
+
+        public void DisplayInfo()
         {
-            if (c != ' ')
-                count++;
+            Console.WriteLine($"Marke: {Marke}, Modell: {Modell}, Baujahr: {Baujahr}");
         }
-        return count;
     }
 
-    static int CountVowels(string text, string vowels = "aeiouAEIOU")
+    static void TestAuto2()
     {
-        if (string.IsNullOrEmpty(text))
-            return 0;
-        
-        int count = 0;
-        foreach (char c in text)
-        {
-            if (vowels.Contains(c))
-                count++;
-        }
-        return count;
+        Auto2 auto1 = new Auto2();
+        auto1.Marke = "BMW";
+        auto1.Modell = "X5";
+        auto1.Baujahr = 2020;
+
+        Auto2 auto2 = new Auto2();
+        auto2.Marke = "Audi";
+        auto2.Modell = "A4";
+        auto2.Baujahr = 2018;
+
+        Auto2 auto3 = new Auto2();
+        auto3.Marke = "Mercedes";
+        auto3.Modell = "C-Klasse";
+        auto3.Baujahr = 2022;
+
+        auto1.DisplayInfo();
+        auto2.DisplayInfo();
+        auto3.DisplayInfo();
     }
 
-    static int CountWords(string text)
+    static void NumberToolsTest()
     {
-        if (string.IsNullOrEmpty(text))
-            return 0;
+        Console.WriteLine($"35 prim: {NumberTools.IsPrime(35)}");
+        Console.WriteLine($"2 prim: {NumberTools.IsPrime(2)}");
+        Console.WriteLine($"17 prim: {NumberTools.IsPrime(17)}");
+        Console.WriteLine($"65537 prim: {NumberTools.IsPrime(65537)}");
+        Console.WriteLine($"114713 prim: {NumberTools.IsPrime(114713)}");
+        Console.WriteLine($"{2147483647} prim: {NumberTools.IsPrime(2147483647)}");
 
-    string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-    return words.Length;
+        NumberTools.PrintPrimesInRange(0, 100);
+        System.Console.WriteLine();
+
+        System.Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
+        System.Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
+        System.Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
     }
 
-    static void PrintTextStats(string text)
+    static void TextStatistik()
     {
-        int letters = CountLetters(text);
-        int vowels = CountVowels(text);
-        int words = CountWords(text);
-
-        Console.WriteLine($"Buchstaben: {letters}");
-        Console.WriteLine($"Vokale: {vowels}");
-        Console.WriteLine($"Woerter: {words}");
+        Console.WriteLine(TextStatistikTool.CountLetters("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountVowels("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountWords("Hallo  Welt von C#"));
     }
 
     static void PasswortStärke()
