@@ -21,7 +21,24 @@
         // PasswortStärke();
         // PasswortStärke();
         // TextStatistik();
-        NumberToolsTest();
+        // NumberToolsTest();
+        Autofahn();
+    }
+
+    static void Autofahn()
+    {
+        var auto1 = new Auto2();
+        auto1.Marke = "BMW";
+        auto1.Modell ="3er";
+        auto1.Baujahr = 1999;
+
+        var auto2 = new Auto2();
+        auto2.Marke = "Opel";
+        auto2.Modell ="Corsa";
+        auto2.Baujahr = 2005;
+
+        auto1.DisplayInfo();
+        auto2.DisplayInfo();
     }
 
     static void NumberToolsTest()
