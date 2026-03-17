@@ -22,7 +22,7 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        TestAuto2();
+        // TestAuto2();
     }
 
     public class Auto2
