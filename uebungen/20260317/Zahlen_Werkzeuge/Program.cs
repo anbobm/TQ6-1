@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Numerics;
 UI.MainLoop();
 
 class UI {
@@ -146,10 +147,12 @@ class NumberTools {
         return true;
     }
 
-    public static long Factorial(int n){
+    // Long is really not a good type for Factorial calculations.
+    // Replaced with BigInteger.
+    public static BigInteger Factorial(int n){
         if(n < 0)return -1;
         if(n == 0)return 1;
-        long factorial = 1;
+        BigInteger factorial = 1;
         for(int i=1; i<=n; i+=1){
             factorial *= i;
         }
