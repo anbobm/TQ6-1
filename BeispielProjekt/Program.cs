@@ -21,6 +21,24 @@
         // PasswortStärke();
         // PasswortStärke();
         // TextStatistik();
+        NumberToolsTest();
+    }
+
+    static void NumberToolsTest()
+    {
+        Console.WriteLine($"35 prim: {NumberTools.IsPrime(35)}");
+        Console.WriteLine($"2 prim: {NumberTools.IsPrime(2)}");
+        Console.WriteLine($"17 prim: {NumberTools.IsPrime(17)}");
+        Console.WriteLine($"65537 prim: {NumberTools.IsPrime(65537)}");
+        Console.WriteLine($"114713 prim: {NumberTools.IsPrime(114713)}");
+        Console.WriteLine($"{2147483647} prim: {NumberTools.IsPrime(2147483647)}");
+
+        NumberTools.PrintPrimesInRange(0, 100);
+        System.Console.WriteLine();
+
+        System.Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
+        System.Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
+        System.Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
     }
 
     static void TextStatistik()
