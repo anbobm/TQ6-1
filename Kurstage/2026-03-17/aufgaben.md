@@ -31,3 +31,11 @@ Das `Baujahr` darf weiterhin nur Werte >= 1880 enthalten.
 # Aufgabe 4: Konstruktor
 
 Ergänze einen passenden Konstruktor in der `Auto`-Klasse, der die Attribute mit den übergebenen Parametern initialisiert.
+
+# Aufgabe 5
+
+Schreibe eine Klasse `Cabrio` die von `Auto` erbt. Diese Klasse soll eine Property `IsVerdeckOffen` (`bool`) besitzen, die festhält, ob das Verdeck geöffnet ist oder nicht. Außerdem überschreibt (`override`) die Klasse die `DisplayInfo()`-Methode (dazu muss in der Basisklasse `Auto` die Methode noch als `virtual` deklariert werden).
+
+# Aufgabe 6
+
+Die Klasse `Auto` soll eine Basisklasse namens `Fahrzeug` bekommen, und diese soll `abstract` sein. In ihr soll es eine abstrakte Methode `Fahren()` geben. Diese soll eine passende Ausgabe in der Kommandozeile erzeugen. 
