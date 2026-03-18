@@ -27,17 +27,19 @@
 
     static void Autofahn()
     {
-        var auto1 = new Auto2();
-        auto1.Marke = "BMW";
-        auto1.Modell ="3er";
-        auto1.Baujahr = 1999;
+        var auto1 = new Auto2("FooW", "Fooran", 1999);
 
-        var auto2 = new Auto2();
-        auto2.Marke = "Opel";
-        auto2.Modell ="Corsa";
-        auto2.Baujahr = 2005;
+        var auto2 = new Auto2("Trabant", "P 60", 2005);
 
         auto1.DisplayInfo();
+        auto2.DisplayInfo();
+        auto2.Modell = "P 601";
+        auto2.DisplayInfo();
+        auto2.Marke = "Opel";
+        auto2.DisplayInfo();
+        auto2.Marke = "FooW";
+        auto2.DisplayInfo();
+        auto2.Modell = "alksdj";
         auto2.DisplayInfo();
     }
 
