@@ -22,7 +22,7 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        // TestAuto2();
+        TestAuto2();
     }
 
     public class Auto2
@@ -31,38 +31,47 @@
         private string modell;
         private int baujahr;
 
-        public string GetMarke()
+        public string Marke
         {
-            return marke;
-        }
-
-        public void SetMarke(string value)
-        {
-            marke = value;
-        }
-
-        public string GetModell()
-        {
-            return modell;
-        }
-
-        public void SetModell(string value)
-        {
-            modell = value;
-        }
-
-        public int GetBaujahr()
-        {
-            return baujahr;
-        }
-
-        public void SetBaujahr(int value)
-        {
-            if (value < 1880)
+            get { return marke; }
+            set
             {
-                throw new ArgumentException("Baujahr darf nicht kleiner als 1880 sein.");
+                if (value != "BMW" && value != "Opel" && value != "Trabant")
+                {
+                    throw new ArgumentException("Marke muss BMW, Opel oder Trabant sein.");
+                }
+                marke = value;
+                Modell = GetDefaultModellForMarke(value);
             }
-            baujahr = value;
+        }
+        
+        public string Modell
+        {
+            get { return modell; }
+            set { modell = value; }
+        }
+
+        public int Baujahr
+        {
+            get { return baujahr; }
+            set
+            {
+                if (value < 1880)
+                {
+                    throw new ArgumentException("Baujahr darf nicht kleiner als 1880 sein.");
+                }
+                baujahr = value;
+            }
+        }
+
+        private string GetDefaultModellForMarke(string marke)
+        {
+            return marke switch
+            {
+                "BMW" => "3er",
+                "Opel" => "Corsa",
+                "Trabant" => "P 50"
+            };
         }
 
         public void DisplayInfo()
@@ -72,146 +81,24 @@
     }
 
     static void TestAuto2()
-    {
-        Auto2 auto1 = new Auto2();
-        auto1.SetMarke("BMW");
-        auto1.SetModell("X5");
-        auto1.SetBaujahr(2020);
+{
+    Auto2 auto1 = new Auto2();
+    auto1.Marke = "BMW";
+    auto1.Baujahr = 2020;
 
-        Auto2 auto2 = new Auto2();
-        auto2.SetMarke("Audi");
-        auto2.SetModell("A4");
-        auto2.SetBaujahr(2018);
+    Auto2 auto2 = new Auto2();
+    auto2.Marke = "Opel";
+    auto2.Baujahr = 2018;
 
-        Auto2 auto3 = new Auto2();
-        auto3.SetMarke("Mercedes");
-        auto3.SetModell("C-Klasse");
-        auto3.SetBaujahr(2022);
+    Auto2 auto3 = new Auto2();
+    auto3.Marke = "Trabant";
+    auto3.Baujahr = 2022;
 
-        auto1.DisplayInfo();
-        auto2.DisplayInfo();
-        auto3.DisplayInfo();
-    }
+    auto1.DisplayInfo();
+    auto2.DisplayInfo();
+    auto3.DisplayInfo();
+}
 
-    static void NumberToolsTest()
-    {
-        Console.WriteLine($"35 prim: {NumberTools.IsPrime(35)}");
-        Console.WriteLine($"2 prim: {NumberTools.IsPrime(2)}");
-        Console.WriteLine($"17 prim: {NumberTools.IsPrime(17)}");
-        Console.WriteLine($"65537 prim: {NumberTools.IsPrime(65537)}");
-        Console.WriteLine($"114713 prim: {NumberTools.IsPrime(114713)}");
-        Console.WriteLine($"{2147483647} prim: {NumberTools.IsPrime(2147483647)}");
-
-        NumberTools.PrintPrimesInRange(0, 100);
-        System.Console.WriteLine();
-
-        System.Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
-        System.Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
-        System.Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
-    }
-
-    static void TextStatistik()
-    {
-        Console.WriteLine(TextStatistikTool.CountLetters("Hallo Welt von C#"));
-        Console.WriteLine(TextStatistikTool.CountVowels("Hallo Welt von C#"));
-        Console.WriteLine(TextStatistikTool.CountWords("Hallo  Welt von C#"));
-    }
-
-    static void PasswortStärke()
-    {
-        PasswortStärkePrüfer.PrintStrengthReport("a2sD!");
-        PasswortStärkePrüfer.PrintStrengthReport("a2saaafgdD!");
-        PasswortStärkePrüfer.PrintStrengthReport("aasdassD!");
-        PasswortStärkePrüfer.PrintStrengthReport("aaaaaaaaaaaaaa");
-        
-    }
-
-    static void ArraySortWithComparer()
-    {
-        Mitarbeiter[] array = [new Mitarbeiter(11), new Mitarbeiter(1000),
-        new Mitarbeiter(10000000), new Mitarbeiter(0)];
-
-        // Funktioniert, wenn Mitarbeiter IComparable implementiert
-        Array.Sort(array);
-
-        // Funktioniert mit übergebenem Comparer
-        Array.Sort(array, new MitarbeiterComparer());
-        
-        foreach(var el in array)
-        {
-            Console.WriteLine(el.Gehalt);
-        }
-    }
-
-    class Mitarbeiter : IComparable<Mitarbeiter>
-    {
-        public int Gehalt { get; set; }
-
-        public Mitarbeiter(int gehalt)
-        {
-            Gehalt = gehalt;
-        }
-
-        public int CompareTo(Mitarbeiter? other)
-        {
-            return this.Gehalt - other.Gehalt;
-        }
-    }
-
-    class MitarbeiterComparer : IComparer<Mitarbeiter>
-    {
-        public int Compare(Mitarbeiter? x, Mitarbeiter? y)
-        {
-            return x.Gehalt - y.Gehalt;
-        }
-    }
-
-    static void Vererbung()
-    {
-        var fahrzeug1 = new Fahrzeug("emma maersk", "grün");
-        fahrzeug1.Fahren();
-        Console.WriteLine(fahrzeug1.Geschwindigkeit);
-        fahrzeug1.Geschwindigkeit = -100;
-        Console.WriteLine(fahrzeug1.Geschwindigkeit);
-
-        var auto1 = new Auto("Opel", "schwarz");
-        auto1.Hupen();
-        auto1.Fahren();
-    }
-
-    static void Exceptions()
-    {
-        try
-        {
-            // Convert.ToInt32("foobar");
-            int NULL = 0;
-            var foo = 1 / NULL;
-        }
-        catch(FormatException)
-        {
-            Console.WriteLine("String war nicht in einem korrekten Format");
-        }
-    }
-
-    static void Tupel()
-    {
-        var person = ("Alice", 30, "Dorfweg 1, 01234 Dorf");
-
-        Console.WriteLine(person.Item1);
-        Console.WriteLine(person.Item2);
-        Console.WriteLine(person.Item3);
-
-        person.Item1 = "Max";
-
-        Console.WriteLine(person);
-
-        var person2 = GetPerson();
-    }
-
-    static (string, int)  GetPerson()
-    {
-        return ("Bob", 25);
-    }
 
     private static void Dictionaries()
     {
@@ -478,4 +365,5 @@
         }
     }
 }
+
 
