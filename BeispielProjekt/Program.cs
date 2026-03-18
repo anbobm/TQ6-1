@@ -27,33 +27,66 @@
 
     public class Auto2
     {
-        public string Marke { get; set; }
-        public string Modell { get; set; }
-        public int Baujahr { get; set; }
+        private string marke;
+        private string modell;
+        private int baujahr;
 
+        public string GetMarke()
+        {
+            return marke;
+        }
+
+        public void SetMarke(string value)
+        {
+            marke = value;
+        }
+
+        public string GetModell()
+        {
+            return modell;
+        }
+
+        public void SetModell(string value)
+        {
+            modell = value;
+        }
+
+        public int GetBaujahr()
+        {
+            return baujahr;
+        }
+
+        public void SetBaujahr(int value)
+        {
+            if (value < 1880)
+            {
+                throw new ArgumentException("Baujahr darf nicht kleiner als 1880 sein.");
+            }
+            baujahr = value;
+        }
 
         public void DisplayInfo()
         {
-            Console.WriteLine($"Marke: {Marke}, Modell: {Modell}, Baujahr: {Baujahr}");
+            Console.WriteLine($"Marke: {marke}, Modell: {modell}, Baujahr: {baujahr}");
         }
     }
 
     static void TestAuto2()
     {
         Auto2 auto1 = new Auto2();
-        auto1.Marke = "BMW";
-        auto1.Modell = "X5";
-        auto1.Baujahr = 2020;
+        auto1.SetMarke("BMW");
+        auto1.SetModell("X5");
+        auto1.SetBaujahr(2020);
 
         Auto2 auto2 = new Auto2();
-        auto2.Marke = "Audi";
-        auto2.Modell = "A4";
-        auto2.Baujahr = 2018;
+        auto2.SetMarke("Audi");
+        auto2.SetModell("A4");
+        auto2.SetBaujahr(2018);
 
         Auto2 auto3 = new Auto2();
-        auto3.Marke = "Mercedes";
-        auto3.Modell = "C-Klasse";
-        auto3.Baujahr = 2022;
+        auto3.SetMarke("Mercedes");
+        auto3.SetModell("C-Klasse");
+        auto3.SetBaujahr(2022);
 
         auto1.DisplayInfo();
         auto2.DisplayInfo();
