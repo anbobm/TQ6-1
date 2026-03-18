@@ -26,3 +26,4 @@ Zulässige Werte für `Modell`, je nach gesetzter Marke:
 * Opel: "Corsa", "Astra", "Adam"
 * Trabant: "P 50", "P 60", "P 601", "1.1"
 
+Das `Baujahr` darf weiterhin nur Werte >= 1880 enthalten.
