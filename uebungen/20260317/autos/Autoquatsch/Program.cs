@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
+/*
 var auto1 = new Auto();
 auto1.Marke = "BMW";
 auto1.Baujahr = "2012";
@@ -21,8 +21,13 @@ auto4.Marke = "Trabant";
 auto4.Modell = "p950"; // falsches Modell
 auto4.Baujahr = "2012";
 auto4.DisplayInfo();
-
-
+*/
+var auto5 = new Auto("Opel", "Corsa", "1990");
+auto5.DisplayInfo();
+var auto6 = new Auto("Opel", "Csa", "1990");
+auto6.DisplayInfo();
+var auto7 = new Auto("VW", "Csa", "1990");
+auto7.DisplayInfo();
 /*
 var auto1 = new Auto();
 auto1.Marke = "Nissan";
@@ -49,9 +54,27 @@ auto4.DisplayInfo();
 */
 class Auto {
 
-    private string? _marke;
-    private string? _modell;
-    private string? _baujahr;
+    private string _marke = "Unbekannte Marke";
+    private string _modell = "Unbekanntes Modell";
+    private string _baujahr = "Unbekanntes Baujahr";
+
+    private Dictionary<string, List<string>> validCars = new Dictionary<string, List<string>>()
+    {
+        {"BMW", ["3er", "5er", "7er"]},
+        {"Opel", ["Corsa", "Astra", "Adam"]},
+        {"Trabant", ["P50", "P60", "P601", "1.1"]}
+    };
+
+    public Auto(string marke, string modell, string baujahr){
+        if(!validCars.ContainsKey(marke))return;
+        _marke = marke;
+        if(!validCars[marke].Contains(modell))return;
+        _modell = modell;
+        
+        int baja = 0;
+        bool isValid =  int.TryParse(baujahr, out baja);
+        if(isValid && baja >= 1880)_baujahr = baja.ToString();
+    }
 
     public string Marke {
         get{return _marke;}
