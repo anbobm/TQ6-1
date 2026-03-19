@@ -42,4 +42,4 @@ Die Klasse `Auto` soll eine Basisklasse namens `Fahrzeug` bekommen, und diese so
 
 # Aufgabe 7
 
-Schreibe eine Klasse `LKW` die von Fahrzeug erbt. Es soll eine Property `Beladung` (`int` in kg) und eine nur lesbare Property (`private set`) `MaximaleBeladung` (`int` in kg) geben, letztere wird dem Konstruktor übergeben. Die Beladung darf sich nur im Bereich zwischen 0 und MaximaleBeladung bewegen.
+Schreibe eine Klasse `LKW` die von Fahrzeug erbt. Es soll eine Property `Beladung` (`int` in kg) und eine nur lesbare Property (`private set`) `MaximaleBeladung` (`int` in kg) geben, letztere wird dem Konstruktor übergeben. Die Beladung darf sich nur im Bereich zwischen 0 und `MaximaleBeladung` bewegen.
