@@ -14,7 +14,7 @@ public class Hund : Tier
 {
     public override void LautGeben()
     {
-        System.Console.WriteLine("Wuff!");
+        Console.WriteLine("Wuff!");
     }
 }
 
@@ -22,12 +22,12 @@ public class Katze : Tier, ISchnurrbar
 {
     public override void LautGeben()
     {
-        System.Console.WriteLine("Miau!");
+        Console.WriteLine("Miau!");
     }
 
     public void Schnurren(string aufWessenSchoß)
     {
-        System.Console.WriteLine($"Katze schnurr auf {aufWessenSchoß}'s Schoß");
+        Console.WriteLine($"Katze schnurr auf {aufWessenSchoß}'s Schoß");
     }
 }
 

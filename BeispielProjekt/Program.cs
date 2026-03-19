@@ -22,51 +22,87 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        // TestAuto2();
-        TestLKW();
+        Autofahn();
     }
 
-    static void TestLKW()
+    static void Autofahn()
     {
-        LKW lkw = new LKW("MAN", "blau", 5000);
+        var cabrio1 = new Cabrio2("BMW", "3er", 2000);
+        cabrio1.DisplayInfo();
+
+        var auto1 = new Auto2("FooW", "Fooran", 1999);
+
+        var auto2 = new Auto2("Trabant", "P 60", 2005);
+
+        auto1.DisplayInfo();
+        auto2.DisplayInfo();
+        auto2.Modell = "P 601";
+        auto2.DisplayInfo();
+        auto2.Marke = "Opel";
+        auto2.DisplayInfo();
+        auto2.Marke = "FooW";
+        auto2.DisplayInfo();
+        auto2.Modell = "alksdj";
+        auto2.DisplayInfo();
+    }
+
+    static void NumberToolsTest()
+    {
+        Console.WriteLine($"35 prim: {NumberTools.IsPrime(35)}");
+        Console.WriteLine($"2 prim: {NumberTools.IsPrime(2)}");
+        Console.WriteLine($"17 prim: {NumberTools.IsPrime(17)}");
+        Console.WriteLine($"65537 prim: {NumberTools.IsPrime(65537)}");
+        Console.WriteLine($"114713 prim: {NumberTools.IsPrime(114713)}");
+        Console.WriteLine($"{2147483647} prim: {NumberTools.IsPrime(2147483647)}");
+
+        NumberTools.PrintPrimesInRange(0, 100);
+        Console.WriteLine();
+
+        Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
+        Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
+        Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
+    }
+
+    static void TextStatistik()
+    {
+        Console.WriteLine(TextStatistikTool.CountLetters("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountVowels("Hallo Welt von C#"));
+        Console.WriteLine(TextStatistikTool.CountWords("Hallo  Welt von C#"));
+    }
+
+    static void PasswortStärke()
+    {
+        PasswortStärkePrüfer.PrintStrengthReport("a2sD!");
+        PasswortStärkePrüfer.PrintStrengthReport("a2saaafgdD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aasdassD!");
+        PasswortStärkePrüfer.PrintStrengthReport("aaaaaaaaaaaaaa");
         
-        lkw.Beladung = 3000;
-        Console.WriteLine(lkw.Beladung); 
-
-        lkw.Beladung = 9999;
-        Console.WriteLine(lkw.Beladung); 
     }
 
-
-    public class Auto2
+    static void ArraySortWithComparer()
     {
-        public Auto2(string marke, int baujahr)
-            {
-                Marke = marke;
-                Baujahr = baujahr;
-            }
-        private string marke;
-        private string modell;
-        private int baujahr;
+        Mitarbeiter[] array = [new Mitarbeiter(11), new Mitarbeiter(1000),
+        new Mitarbeiter(10000000), new Mitarbeiter(0)];
 
-        public string Marke
+        // Funktioniert, wenn Mitarbeiter IComparable implementiert
+        Array.Sort(array);
+
+        // Funktioniert mit übergebenem Comparer
+        Array.Sort(array, new MitarbeiterComparer());
+        
+        foreach(var el in array)
         {
-            get { return marke; }
-            set
-            {
-                if (value != "BMW" && value != "Opel" && value != "Trabant")
-                {
-                    throw new ArgumentException("Marke muss BMW, Opel oder Trabant sein.");
-                }
-                marke = value;
-                Modell = GetDefaultModellForMarke(value);
-            }
+            Console.WriteLine(el.Gehalt);
         }
-        
-        public string Modell
+    }
+
+    class Mitarbeiter : IComparable<Mitarbeiter>
+    {
+        public int Gehalt { get; set; }
+
+        public Mitarbeiter(int gehalt)
         {
-            get { return modell; }
-            set { modell = value; }
+            Gehalt = gehalt;
         }
 
         public int Baujahr

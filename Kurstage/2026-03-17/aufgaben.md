@@ -31,3 +31,28 @@ Das `Baujahr` darf weiterhin nur Werte >= 1880 enthalten.
 # Aufgabe 4: Konstruktor
 
 Ergänze einen passenden Konstruktor in der `Auto`-Klasse, der die Attribute mit den übergebenen Parametern initialisiert.
+
+# Aufgabe 5
+
+Schreibe eine Klasse `Cabrio` die von `Auto` erbt. Diese Klasse soll eine Property `IsVerdeckOffen` (`bool`) besitzen, die festhält, ob das Verdeck geöffnet ist oder nicht. Außerdem überschreibt (`override`) die Klasse die `DisplayInfo()`-Methode (dazu muss in der Basisklasse `Auto` die Methode noch als `virtual` deklariert werden).
+
+# Aufgabe 6
+
+Die Klasse `Auto` soll eine Basisklasse namens `Fahrzeug` bekommen, und diese soll `abstract` sein. In ihr soll es eine abstrakte Methode `Fahren()` geben. Diese soll eine passende Ausgabe in der Kommandozeile erzeugen. 
+
+# Aufgabe 7
+
+Schreibe eine Klasse `LKW` die von Fahrzeug erbt. Es soll eine Property `Beladung` (`int` in kg) und eine nur lesbare Property (`private set`) `MaximaleBeladung` (`int` in kg) geben, letztere wird dem Konstruktor übergeben. Die Beladung darf sich nur im Bereich zwischen 0 und `MaximaleBeladung` bewegen.
+
+# Aufgabe 8
+
+Es soll ein Interface `ILog` welches folgende Methoden definiert:
+
+* `LogInfo(string message)`
+* `LogWarning(string message)`
+* `LogError(string message)`
+
+Dieses Interface soll nun von zwei Klassen implementiert werden:
+
+* `ConsoleLogger`
+* `FileLogger` (Hinweis: `File.AppendAllText(pfad, text)`)
