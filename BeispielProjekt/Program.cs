@@ -1,4 +1,4 @@
-﻿internal class Program
+internal class Program
 {
     private static void Main(string[] args)
     {
@@ -22,7 +22,21 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        Autofahn();
+        // Autofahn();
+        TestLogger();
+    }
+
+    static void TestLogger()
+    {
+        ILog console = new ConsoleLogger();
+        console.LogInfo("Server gestartet");
+        console.LogWarning("Speicher niedrig");
+        console.LogError("Verbindung getrennt");
+
+        ILog file = new FileLogger("log.txt");
+        file.LogInfo("Server gestartet");
+        file.LogWarning("Speicher niedrig");
+        file.LogError("Verbindung getrennt");
     }
 
     static void Autofahn()
@@ -76,7 +90,6 @@
         PasswortStärkePrüfer.PrintStrengthReport("a2saaafgdD!");
         PasswortStärkePrüfer.PrintStrengthReport("aasdassD!");
         PasswortStärkePrüfer.PrintStrengthReport("aaaaaaaaaaaaaa");
-        
     }
 
     static void ArraySortWithComparer()
@@ -84,12 +97,10 @@
         Mitarbeiter[] array = [new Mitarbeiter(11), new Mitarbeiter(1000),
         new Mitarbeiter(10000000), new Mitarbeiter(0)];
 
-        // Funktioniert, wenn Mitarbeiter IComparable implementiert
         Array.Sort(array);
 
-        // Funktioniert mit übergebenem Comparer
         Array.Sort(array, new MitarbeiterComparer());
-        
+
         foreach(var el in array)
         {
             Console.WriteLine(el.Gehalt);
@@ -105,48 +116,30 @@
             Gehalt = gehalt;
         }
 
-        public int Baujahr
+        public int CompareTo(Mitarbeiter? other)
         {
-            get { return baujahr; }
-            set
-            {
-                if (value < 1880)
-                {
-                    throw new ArgumentException("Baujahr darf nicht kleiner als 1880 sein.");
-                }
-                baujahr = value;
-            }
+            return Gehalt.CompareTo(other?.Gehalt);
         }
+    }
 
-        private string GetDefaultModellForMarke(string marke)
+    class MitarbeiterComparer : IComparer<Mitarbeiter>
+    {
+        public int Compare(Mitarbeiter? x, Mitarbeiter? y)
         {
-            return marke switch
-            {
-                "BMW" => "3er",
-                "Opel" => "Corsa",
-                "Trabant" => "P 50"
-            };
-        }
-
-        public void DisplayInfo()
-        {
-            Console.WriteLine($"Marke: {marke}, Modell: {modell}, Baujahr: {baujahr}");
+            return x!.Gehalt.CompareTo(y!.Gehalt);
         }
     }
 
     static void TestAuto2()
-{
-    Auto2 auto1 = new Auto2("BMW", 2020);
+    {
+        Auto2 auto1 = new Auto2("BMW", "3er", 2020);
+        Auto2 auto2 = new Auto2("Opel", "Corsa", 2018);
+        Auto2 auto3 = new Auto2("Trabant", "P 50", 2022);
 
-    Auto2 auto2 = new Auto2("Opel", 2018);
-
-    Auto2 auto3 = new Auto2("Trabant", 2022);
-
-    auto1.DisplayInfo();
-    auto2.DisplayInfo();
-    auto3.DisplayInfo();
-}
-
+        auto1.DisplayInfo();
+        auto2.DisplayInfo();
+        auto3.DisplayInfo();
+    }
 
     private static void Dictionaries()
     {
@@ -169,9 +162,6 @@
 
         Console.WriteLine(wert);
 
-
-
-
         foreach(var values in dict.Values)
         {
             Console.WriteLine($"Wert: {values}");
@@ -187,8 +177,6 @@
         foreach(int number in grades){
             Console.Write(number + ", ");
         }
-        //Output: 37, 78, 81, 92, 99
-
     }
 
     private static void Linq()
@@ -219,40 +207,9 @@
 
     static void Lösung()
     {
-        // Schreibe ein Programm, welches eine Zahl vom Benutzer einliest (z.B. 5)
-        // und dann folgende Ausgabe erzeugt:
-        // (1 + 2 + 3 + 4 + 5) * 2 = 30
-        // Schreibe das Programm einmal mit einer for-Schleife und
-        // einmal mit einer while-Schleife.
-
         Console.WriteLine("Gib Zahl!");
         var zahl = Convert.ToInt32(Console.ReadLine());
 
-        // Alternative 1 mit for
-        // var summe = 0;
-        // Console.Write("(");
-        // for(int i = 1; i <= zahl; i++)
-        // {
-        //     if (i > 1)
-        //     {
-        //         Console.Write(" + ");
-        //     }
-        //     Console.Write(i);
-        //     summe += i;
-        // }
-        // Console.WriteLine($") * 2 = {summe * 2}");
-
-        // Alternative 2 mit for
-        // var summe = 0;
-        // var liste = new List<string>();
-        // for(int i = 1; i <= zahl; i++)
-        // {
-        //     liste.Add(i.ToString());
-        //     summe += i;
-        // }
-        // Console.WriteLine($"({string.Join(" + ", liste)}) * 2 = {summe * 2}");
-
-        // Alternative 3 mit while
         var summe = 0;
         Console.Write("(");
         int i = 1;
@@ -271,7 +228,6 @@
 
     static void Klassenbibliothek()
     {
-        // Methoden der Math-Klasse
         Console.WriteLine(Math.Max(3,4));
         Console.WriteLine(Math.Min(3,4));
         Console.WriteLine(Math.Abs(-12));
@@ -283,12 +239,9 @@
         Console.WriteLine(Math.Sqrt(81));
         Console.WriteLine(Math.Pow(2, 8));
 
-
-        // Random-Klasse für Zufallszahlen
         var random = new Random();
         Console.WriteLine(random.Next());
 
-        // File-Klasse für Zugriffe auf das Dateisystem
         var file = File.ReadLines("foo.txt");
     }
 
@@ -296,57 +249,44 @@
     {
         int foo = 0;
 
-        // Zusammengesetzte Zuweisung
-
-        foo += 5; // foo = foo + 5;
-        foo -= 7; // foo = foo - 7;
-        foo /= 3; // foo = foo / 3;
-        foo *= 4; // foo = foo * 4;
+        foo += 5;
+        foo -= 7;
+        foo /= 3;
+        foo *= 4;
     }
 
     static void Typumwandlungen()
     {
-        // Implizierter Cast von int -> long
         int zahl = 3218238;
         long große_zahl = zahl;
 
-        // Explizierter Cast von long -> int
-        // Explizit weil prinzipiell Datenverlust, so wie hier:
         große_zahl = 2_147_483_648;
         zahl = (int) große_zahl;
-        Console.WriteLine(zahl); // -2^31
+        Console.WriteLine(zahl);
 
-        // Implizierter Cast von int -> double
         zahl = 3218238;
-        double kommazahl = zahl; // 3218238.0
+        double kommazahl = zahl;
 
-        // Expliziert Cast von double -> int
         kommazahl = 3.5;
         zahl = (int) kommazahl;
         Console.WriteLine(zahl);
 
-        // Strings in Zahlen umwandeln
         Console.WriteLine(Convert.ToInt32("32512"));
-
-        // das geht auch mit anderen Basen: 2, 8, 16
         Console.WriteLine(Convert.ToInt32("CAFE", 16));
         Console.WriteLine(Convert.ToInt32("10010101101", 2));
     }
 
     static void Division()
     {
-        // Ganzzahlige Division (links und rechts vom / ist ganzzahlig)
         var quotient_int = 7 / 2;
         Console.WriteLine(quotient_int);
 
-        // Gebrochenzahlige Division (links oder rechts vom / ist gebrochen)
         var quotient_double = 7 / 2.0;
         Console.WriteLine(quotient_double);
     }
 
     static void Begrüßung(string name)
     {
-        // Methode mit Parametern ^^^
         Console.WriteLine($"Willkommen im Kurs, {name}!");
     }
 
@@ -394,6 +334,7 @@
                 break;
         }
     }
+
     static void AufagbeArray()
     {
         Random rnd = new Random();
@@ -411,5 +352,3 @@
         }
     }
 }
-
-

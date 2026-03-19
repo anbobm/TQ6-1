@@ -1,15 +1,3 @@
-// Zahlen-Werkzeuge (Primzahlen & Fakultät)
-// Methoden
-// bool IsPrime(int n)
-// long Factorial(int n)
-// void PrintPrimesInRange(int start, int end)
-// int CountPrimesInRange(int start, int end)
-// Regeln
-// Factorial gibt -1 zurück bei ungültiger Eingabe (z. B. negative Zahlen)
-// PrintPrimesInRange gibt alle Primzahlen im Bereich aus
-// Bonus
-// int SumOfDigits(int n)
-// Diese Methode soll die Quersumme einer Zahl berechnen.
 
 static class NumberTools
 {
