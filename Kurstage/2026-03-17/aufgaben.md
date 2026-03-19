@@ -43,3 +43,16 @@ Die Klasse `Auto` soll eine Basisklasse namens `Fahrzeug` bekommen, und diese so
 # Aufgabe 7
 
 Schreibe eine Klasse `LKW` die von Fahrzeug erbt. Es soll eine Property `Beladung` (`int` in kg) und eine nur lesbare Property (`private set`) `MaximaleBeladung` (`int` in kg) geben, letztere wird dem Konstruktor übergeben. Die Beladung darf sich nur im Bereich zwischen 0 und `MaximaleBeladung` bewegen.
+
+# Aufgabe 8
+
+Es soll ein Interface `ILog` welches folgende Methoden definiert:
+
+* `LogInfo(string message)`
+* `LogWarning(string message)`
+* `LogError(string message)`
+
+Dieses Interface soll nun von zwei Klassen implementiert werden:
+
+* `ConsoleLogger`
+* `FileLogger` (Hinweis: `File.AppendAllText(pfad, text)`)
