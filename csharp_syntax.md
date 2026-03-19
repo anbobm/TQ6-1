@@ -79,43 +79,21 @@ nuint
 | :-------------| :----------------------------------| :--------|
 | float         | ±1,5 x 10^−45 bis ±3,4 x 10^38     | 4 Byte   |
 | double        | ±5.0 × 10^−324 bis ±1,7 × 10^308   | 8 Byte   |
-| decimal       |	±1.0 × 10^-28 to ±7.9228 × 10^28 | 16 Bytes |
+| decimal       | ±1.0 × 10^-28 to ±7.9228 × 10^28   | 16 Bytes |
 
+**Nutze BigInteger aus dem Namespace Syste.Numerics für "beliebig" große Integers**
 
 # String Templates
 
-# Verbatim Strings
+Werden mit **$""** gebildet
 
-Aufgabe 03-03-2026
-
-Vorgabe:
+## Beispiel:
 
 ```c#
-string projectName = "ACME";
-
-string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
+Console.WriteLine($"Some Text {someVariable} more text");
 ```
 
-Gewünschte Ausgabe:
 
-```
-View English output:
-  c:\Exercise\ACME\data.txt
-
-Посмотреть русский вывод:
-  c:\Exercise\ACME\ru-RU\data.txt
-```
-
-Lösung:
-
-```c#
-string projectName = "ACME";
-
-string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
-
-Console.WriteLine($"View English output:\n  c:\\Exercise\\{projectName}\\data.txt");
-Console.WriteLine($"\n{russianMessage}:\n  c:\\Exercise\\{projectName}\\ru-Ru\\data.txt");
-```
 
 # Methoden
 public / private / protected
@@ -139,3 +117,54 @@ Alle Elemente müssen den gleichen Datentyp haben.
 int[] myArray = new int[3];
 int[] myArray2 = [1, 2, 3];
 ```
+
+## Nützliche Array Methoden
+
+### myArray.Length
+
+Gibt die Anzahl an Elementen in einem Array zurück.
+
+# Listen
+
+Anlegen:
+
+```c#
+List<string> myList = new List<string>();
+List<string> myList2 = ["asdf", "jklö", "blub"];
+```
+
+Nützliche Properties
+
+.Count: Gibt die Anzahl an Elementen in der Liste zurück.
+
+```c#
+List<string> myList = ["asdf", "jklö", "blub"];
+elementCount = myList.Count
+Console.WriteLine(elementCount) // 3
+```
+
+# Dictionaries
+
+```c#
+Dictionary<string, int> myDict = new Dictionary<string, int>(){
+    {foo, 5},
+    {bar, 7},
+}
+
+Console.WriteLine(myDict["bar"]) // 7
+```
+
+# Klassen
+
+```c#
+class MyClass {
+    public string Property1 {get; set;} = "Prop1";
+    public int Property2 {get; set;} = 5;
+
+    public string Method1(){
+        return $"{Property1} - {Property2}" // "Prop1 - 5"
+    }
+}
+```
+
+

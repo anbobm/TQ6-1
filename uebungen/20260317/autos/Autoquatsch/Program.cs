@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
 /*
 var auto1 = new Auto();
 auto1.Marke = "BMW";
@@ -27,7 +28,16 @@ auto5.DisplayInfo();
 var auto6 = new Auto("Opel", "Csa", "1990");
 auto6.DisplayInfo();
 var auto7 = new Auto("VW", "Csa", "1990");
+auto7.Fahren();
 auto7.DisplayInfo();
+
+var cabrio1 = new Cabrio("BMW", "3er", "1990", true);
+cabrio1.DisplayInfo();
+cabrio1.Fahren();
+
+var cabrio2 = new Cabrio("BMW", "3er", "1980", false);
+cabrio2.DisplayInfo();
+cabrio2.Fahren();
 /*
 var auto1 = new Auto();
 auto1.Marke = "Nissan";
@@ -48,11 +58,13 @@ auto3.Baujahr = "2024";
 auto3.DisplayInfo();
 */
 
-/*
-var auto4 = new AutoMitKonstruktor("General Motors", "K.I.T.T", "1982");
-auto4.DisplayInfo();
-*/
-class Auto {
+abstract class Fahrzeug {
+    public void Fahren(){
+        Console.WriteLine("Das Fahrzeug bewegt sich.");
+    }
+}
+
+class Auto : Fahrzeug {
 
     private string _marke = "Unbekannte Marke";
     private string _modell = "Unbekanntes Modell";
@@ -85,8 +97,6 @@ class Auto {
             var random = new Random();
             List<List<string>> validModels = [["3er", "5er", "7er"], ["Corsa", "Astra", "Adam"], ["P50", "P60", "P601", "1.1"]];
             int markeIndex = Array.IndexOf(validChoices, _marke);
-            //Console.WriteLine(markeIndex);
-            //Console.WriteLine(validModels[markeIndex].Count);
             string randomModell = validModels[markeIndex][random.Next(0, validModels[markeIndex].Count)];
             _modell = randomModell;
         }
@@ -115,23 +125,24 @@ class Auto {
         }
     }
 
-    public void DisplayInfo(){
+    virtual public void DisplayInfo(){
         Console.WriteLine($"Ein tolles Auto der Marke: {_marke}, Modell: {_modell}, Baujahr: {_baujahr}");
     }
 }
 
-class AutoMitKonstruktor {
-    public string Marke {get; set;}
-    public string Modell {get; set;}
-    public string Baujahr {get; set;}
+class Cabrio : Auto{
+    public bool IsVerdeckOffen {get; set;}
 
-    public AutoMitKonstruktor(string marke, string modell, string baujahr){
-        Marke = marke;
-        Modell = modell;
-        Baujahr = baujahr;
+    public Cabrio(string marke, string modell, string baujahr, bool verdeckOffen) : base(marke, modell, baujahr){
+        IsVerdeckOffen = verdeckOffen;
     }
 
-    public void DisplayInfo(){
-        Console.WriteLine($"Ein tolles Auto der Marke {Marke}, Modell: {Modell}, Baujahr: {Baujahr}");
+    override public void DisplayInfo(){
+        Console.Write($"\nEin tolles Cabrio der Marke: {Marke}, Modell: {Modell}, Baujahr: {Baujahr}.");
+        if(IsVerdeckOffen){
+            Console.Write(" Die Sonne scheint. Verdeck offen. Lets Goooo.\n");
+        }else{
+            Console.Write(" Es regnet mal wieder. Verdeck zu. Laune im Keller -_-\n");
+        }
     }
 }
