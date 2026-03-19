@@ -22,11 +22,29 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        TestAuto2();
+        // TestAuto2();
+        TestLKW();
     }
+
+    static void TestLKW()
+    {
+        LKW lkw = new LKW("MAN", "blau", 5000);
+        
+        lkw.Beladung = 3000;
+        Console.WriteLine(lkw.Beladung); 
+
+        lkw.Beladung = 9999;
+        Console.WriteLine(lkw.Beladung); 
+    }
+
 
     public class Auto2
     {
+        public Auto2(string marke, int baujahr)
+            {
+                Marke = marke;
+                Baujahr = baujahr;
+            }
         private string marke;
         private string modell;
         private int baujahr;
@@ -82,17 +100,11 @@
 
     static void TestAuto2()
 {
-    Auto2 auto1 = new Auto2();
-    auto1.Marke = "BMW";
-    auto1.Baujahr = 2020;
+    Auto2 auto1 = new Auto2("BMW", 2020);
 
-    Auto2 auto2 = new Auto2();
-    auto2.Marke = "Opel";
-    auto2.Baujahr = 2018;
+    Auto2 auto2 = new Auto2("Opel", 2018);
 
-    Auto2 auto3 = new Auto2();
-    auto3.Marke = "Trabant";
-    auto3.Baujahr = 2022;
+    Auto2 auto3 = new Auto2("Trabant", 2022);
 
     auto1.DisplayInfo();
     auto2.DisplayInfo();
@@ -123,8 +135,6 @@
 
 
 
-        // KeyNotFoundException
-        // Console.WriteLine(dict["bar"]);
 
         foreach(var values in dict.Values)
         {

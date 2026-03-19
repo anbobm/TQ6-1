@@ -42,6 +42,27 @@ public class Fahrzeug
     }
 }
 
+public class LKW : Fahrzeug
+{
+    public int MaximaleBeladung { get; private set; }
+
+    private int beladung;
+    public int Beladung
+    {
+        get { return beladung; }
+        set
+        {
+            if (value < 0 || value > MaximaleBeladung) return;
+            beladung = value;
+        }
+    }
+
+    public LKW(string marke, string farbe, int maximaleBeladung) : base(marke, farbe)
+    {
+        MaximaleBeladung = maximaleBeladung;
+    }
+}
+
 public class Auto : Fahrzeug
 {
     private bool istCabrio;
