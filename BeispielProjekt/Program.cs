@@ -27,6 +27,9 @@
 
     static void Autofahn()
     {
+        var cabrio1 = new Cabrio2("BMW", "3er", 2000);
+        cabrio1.DisplayInfo();
+
         var auto1 = new Auto2("FooW", "Fooran", 1999);
 
         var auto2 = new Auto2("Trabant", "P 60", 2005);
@@ -53,11 +56,11 @@
         Console.WriteLine($"{2147483647} prim: {NumberTools.IsPrime(2147483647)}");
 
         NumberTools.PrintPrimesInRange(0, 100);
-        System.Console.WriteLine();
+        Console.WriteLine();
 
-        System.Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
-        System.Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
-        System.Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
+        Console.WriteLine($"5! = {NumberTools.Factorial(5)}");
+        Console.WriteLine($"10! = {NumberTools.Factorial(10)}");
+        Console.WriteLine($"52! = {NumberTools.Factorial(52)}");
     }
 
     static void TextStatistik()

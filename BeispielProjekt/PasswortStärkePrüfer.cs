@@ -119,7 +119,7 @@ static class PasswortStärkePrüfer
 
     public static void PrintStrengthReport(string password)
     {
-        System.Console.WriteLine($"Kriterien von Passwort {password}:");
+        Console.WriteLine($"Kriterien von Passwort {password}:");
         if(HasMinLength(password))
         {
             Console.WriteLine("\tLang jenuch");

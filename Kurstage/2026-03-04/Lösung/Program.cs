@@ -9,4 +9,4 @@ var kathete2 = Convert.ToInt32(Console.ReadLine());
 
 var hypothenuse = Math.Sqrt(Math.Pow(kathete1, 2) + Math.Pow(kathete2, 2));
 
-System.Console.WriteLine($"Die Hypothenuse ist {hypothenuse} lang.");
+Console.WriteLine($"Die Hypothenuse ist {hypothenuse} lang.");

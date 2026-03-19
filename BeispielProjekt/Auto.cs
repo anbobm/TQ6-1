@@ -1,4 +1,9 @@
-class Auto2
+abstract class Fahrzeug2
+{
+    abstract public void Fahren();
+}
+
+class Auto2 : Fahrzeug2
 {
     private Dictionary<string, string[]> marken = new Dictionary<string, string[]>()
     {
@@ -80,8 +85,32 @@ class Auto2
             modell = value;
         }
     }
-    public void DisplayInfo()
+    public virtual void DisplayInfo()
     {
         Console.WriteLine($"Auto: {Marke} {Modell}, Baujahr {Baujahr}");
+    }
+
+    public override void Fahren()
+    {
+        Console.WriteLine("Brumm Brumm!");
+    }
+}
+
+class Cabrio2 : Auto2
+{
+    public bool IsVerdeckOffen {get; set;}
+
+    public Cabrio2(string marke, string modell, int baujahr, bool isVerdeckOffen = false) : base(marke, modell, baujahr)
+    {
+        IsVerdeckOffen = isVerdeckOffen;
+    }    
+
+    override public void DisplayInfo(){
+        Console.Write($"\nEin tolles Cabrio der Marke: {Marke}, Modell: {Modell}, Baujahr: {Baujahr}.");
+        if(IsVerdeckOffen){
+            Console.Write(" Die Sonne scheint. Verdeck offen. Lets Goooo.\n");
+        }else{
+            Console.Write(" Es regnet mal wieder. Verdeck zu. Laune im Keller 😑\n");
+        }
     }
 }
