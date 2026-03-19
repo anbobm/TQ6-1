@@ -58,10 +58,87 @@ auto3.Baujahr = "2024";
 auto3.DisplayInfo();
 */
 
-abstract class Fahrzeug {
-    public void Fahren(){
-        Console.WriteLine("Das Fahrzeug bewegt sich.");
+var lkw1 = new LKW(5000, 0);
+lkw1.Fahren();
+lkw1.Beladung = 6000;
+lkw1.DisplayInfo();
+lkw1.Beladung = 3000;
+lkw1.DisplayInfo();
+
+interface ILog {
+   public void LogInfo(string message);
+   public void LogWarning(string message);
+   public void LogError(string message);
+}
+
+class ConsoleLogger : ILog {
+    public void LogInfo(string message){
+        Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Info: {message}");
     }
+    public void LogWarning(string message){
+        Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Warning: {message}");
+    }
+    public void LogError(string message){
+        Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Error: {message}");
+    }
+}
+
+class FileLogger : ILog {
+    public void LogInfo(string message){
+        File.AppendAllText("Logs/ilogger.log", $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Info: {message}\n");
+    }
+    public void LogWarning(string message){
+        File.AppendAllText("Logs/ilogger.log", $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Warning: {message}\n");
+    }
+    public void LogError(string message){
+        File.AppendAllText("Logs/ilogger.log", $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Error: {message}\n");
+    }
+}
+
+/*
+class FileLogger : ILog {
+
+}
+*/
+
+abstract class Fahrzeug {
+    abstract public void Fahren();
+}
+
+class LKW : Fahrzeug {
+
+    private ConsoleLogger consoleLogger = new ConsoleLogger();
+    private FileLogger fileLogger = new FileLogger();
+    private int _beladung = 0; 
+    public int MaximaleBeladung {get; private set;}
+    public int Beladung {
+        get {
+         return _beladung;
+        } 
+        set{
+            if(value <= MaximaleBeladung){
+                _beladung = value;
+                consoleLogger.LogInfo($"Fracht mit einem Gewicht von {value} wurde geladen ");
+                fileLogger.LogInfo($"Fracht mit einem Gewicht von {value} wurde geladen ");
+            }
+            consoleLogger.LogError($"Fracht ist zu schwer");
+            fileLogger.LogError($"Fracht ist zu schwer");
+        }
+    }
+
+    public LKW (int maximaleBeladung, int beladung = 0) {
+        MaximaleBeladung = maximaleBeladung;
+        _beladung = beladung;
+    }
+ 
+    public override void Fahren(){
+        Console.WriteLine("Der LKW fährt...");
+    }
+
+    public void DisplayInfo(){
+        Console.WriteLine($"Ein Toller LKW mit zulässiger Beladung von {MaximaleBeladung}kg. Die derzeitige Ladung wiegt {_beladung}kg ");
+    }
+   
 }
 
 class Auto : Fahrzeug {
@@ -128,6 +205,10 @@ class Auto : Fahrzeug {
     virtual public void DisplayInfo(){
         Console.WriteLine($"Ein tolles Auto der Marke: {_marke}, Modell: {_modell}, Baujahr: {_baujahr}");
     }
+
+    public override void Fahren(){
+        Console.WriteLine("Das Auto fährt...");
+    }
 }
 
 class Cabrio : Auto{
@@ -144,5 +225,9 @@ class Cabrio : Auto{
         }else{
             Console.Write(" Es regnet mal wieder. Verdeck zu. Laune im Keller -_-\n");
         }
+    }
+
+    public override void Fahren(){
+        Console.WriteLine("Das Cabrio fährt...");
     }
 }
