@@ -1,9 +1,10 @@
-abstract class Fahrzeug2
+abstract class Fahrzeug
 {
     abstract public void Fahren();
 }
 
-class Auto2 : Fahrzeug2
+
+class Auto : Fahrzeug
 {
     private Dictionary<string, string[]> marken = new Dictionary<string, string[]>()
     {
@@ -18,7 +19,7 @@ class Auto2 : Fahrzeug2
 
     private string modell;
 
-    public Auto2(string marke, string modell, int baujahr)
+    public Auto(string marke, string modell, int baujahr)
     {
         if (baujahr < 1880) this.baujahr = 1880;
 
@@ -96,11 +97,11 @@ class Auto2 : Fahrzeug2
     }
 }
 
-class Cabrio2 : Auto2
+class Cabrio : Auto
 {
     public bool IsVerdeckOffen {get; set;}
 
-    public Cabrio2(string marke, string modell, int baujahr, bool isVerdeckOffen = false) : base(marke, modell, baujahr)
+    public Cabrio(string marke, string modell, int baujahr, bool isVerdeckOffen = false) : base(marke, modell, baujahr)
     {
         IsVerdeckOffen = isVerdeckOffen;
     }    
@@ -115,7 +116,7 @@ class Cabrio2 : Auto2
     }
 }
 
-class Lkw2 : Fahrzeug2
+class Lkw : Fahrzeug
 {
     private int beladung;
 
@@ -138,7 +139,7 @@ class Lkw2 : Fahrzeug2
 
     public int MaximaleBeladung { get; private set; }
 
-    public Lkw2(int maximaleBeladung)
+    public Lkw(int maximaleBeladung)
     {
         MaximaleBeladung = maximaleBeladung;
     }

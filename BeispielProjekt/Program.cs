@@ -38,19 +38,19 @@
 
     static void Autofahn()
     {
-        var lkw1 = new Lkw2(40000);
+        var lkw1 = new Lkw(40000);
         Console.WriteLine(lkw1.Beladung);
         lkw1.Beladung = 40;
         Console.WriteLine(lkw1.Beladung);
         lkw1.Beladung = 100_000;
         Console.WriteLine(lkw1.Beladung);
 
-        var cabrio1 = new Cabrio2("BMW", "3er", 2000);
+        var cabrio1 = new Cabrio("BMW", "3er", 2000);
         cabrio1.DisplayInfo();
 
-        var auto1 = new Auto2("FooW", "Fooran", 1999);
+        var auto1 = new Auto("FooW", "Fooran", 1999);
 
-        var auto2 = new Auto2("Trabant", "P 60", 2005);
+        var auto2 = new Auto("Trabant", "P 60", 2005);
 
         auto1.DisplayInfo();
         auto2.DisplayInfo();
@@ -137,18 +137,6 @@
         }
     }
 
-    static void Vererbung()
-    {
-        var fahrzeug1 = new Fahrzeug("emma maersk", "grün");
-        fahrzeug1.Fahren();
-        Console.WriteLine(fahrzeug1.Geschwindigkeit);
-        fahrzeug1.Geschwindigkeit = -100;
-        Console.WriteLine(fahrzeug1.Geschwindigkeit);
-
-        var auto1 = new Auto("Opel", "schwarz");
-        auto1.Hupen();
-        auto1.Fahren();
-    }
 
     static void Exceptions()
     {
