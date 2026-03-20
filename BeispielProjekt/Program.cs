@@ -22,11 +22,29 @@
         // PasswortStärke();
         // TextStatistik();
         // NumberToolsTest();
-        Autofahn();
+        // Autofahn();
+
+        Logging();
+    }
+
+    static void Logging()
+    {
+        var logger = new FileLogger("filelogger.log");
+
+        logger.LogError("Beladung zu groß. Beladung wurde nicht geändert.");
+        logger.LogInfo("Es gibt Reis! Baby, Baby, es gibt Reis!");
+        logger.LogWarning("Achtung, es ist kalt draußen!");
     }
 
     static void Autofahn()
     {
+        var lkw1 = new Lkw2(40000);
+        Console.WriteLine(lkw1.Beladung);
+        lkw1.Beladung = 40;
+        Console.WriteLine(lkw1.Beladung);
+        lkw1.Beladung = 100_000;
+        Console.WriteLine(lkw1.Beladung);
+
         var cabrio1 = new Cabrio2("BMW", "3er", 2000);
         cabrio1.DisplayInfo();
 

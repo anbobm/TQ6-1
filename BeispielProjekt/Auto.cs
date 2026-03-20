@@ -114,3 +114,37 @@ class Cabrio2 : Auto2
         }
     }
 }
+
+class Lkw2 : Fahrzeug2
+{
+    private int beladung;
+
+    public int Beladung
+    {
+        get
+        {
+            return beladung;
+        }
+        set
+        {
+            if (value < 0 || value > MaximaleBeladung)
+            {
+                return;
+            }
+
+            beladung = value;
+        }
+    }
+
+    public int MaximaleBeladung { get; private set; }
+
+    public Lkw2(int maximaleBeladung)
+    {
+        MaximaleBeladung = maximaleBeladung;
+    }
+
+    public override void Fahren()
+    {
+        Console.WriteLine("Der LKW fährt 🤷");
+    }
+}
