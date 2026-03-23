@@ -1,6 +1,27 @@
-abstract class Fahrzeug
+abstract class Fortbewegungsmittel
+{
+    public double Geschwindigkeit { get; set; }
+}
+
+abstract class Schwimmzeug : Fortbewegungsmittel
+{
+    abstract public void Schwimmen();
+}
+
+abstract class Flugzeug : Fortbewegungsmittel
+{
+    abstract public void Fliegen();
+}
+
+abstract class Fahrzeug : Fortbewegungsmittel
 {
     abstract public void Fahren();
+
+    virtual public int Baujahr { get; set; }
+
+    virtual public string Marke { get; set; }
+
+    virtual public string Modell { get; set; }
 }
 
 
@@ -19,8 +40,12 @@ class Auto : Fahrzeug
 
     private string modell;
 
-    public Auto(string marke, string modell, int baujahr)
+    private ILog logger;
+
+    public Auto(string marke, string modell, int baujahr, ILog logger)
     {
+        this.logger = logger;
+
         if (baujahr < 1880) this.baujahr = 1880;
 
         this.baujahr = baujahr;
@@ -43,7 +68,7 @@ class Auto : Fahrzeug
         this.modell = modell;
     }
 
-    public int Baujahr
+    override public int Baujahr
     {
         get
         {
@@ -51,13 +76,17 @@ class Auto : Fahrzeug
         }
         set
         {
-            if (value < 1880) return;
+            if (value < 1880)
+            {
+                logger.LogWarning($"Es wurde versucht Baujahr auf einen ungültigen Wert ({value}) zu setzen.");
+                return;
+            }
             
             baujahr = value;
         }
     }
     
-    public string Marke
+    override public string Marke
     {
         get
         {
@@ -73,7 +102,7 @@ class Auto : Fahrzeug
         }
     }
 
-    public string Modell
+    override public string Modell
     {
         get
         {
@@ -93,15 +122,35 @@ class Auto : Fahrzeug
 
     public override void Fahren()
     {
-        Console.WriteLine("Brumm Brumm!");
+        if (DateTime.Now.Hour >= 12)
+        {
+            Console.WriteLine("Brumm Brumm!");
+        }
     }
 }
 
 class Cabrio : Auto
 {
-    public bool IsVerdeckOffen {get; set;}
+    private bool isVerdeckOffen;
 
-    public Cabrio(string marke, string modell, int baujahr, bool isVerdeckOffen = false) : base(marke, modell, baujahr)
+    public bool IsVerdeckOffen
+    {
+        get
+        {
+            return isVerdeckOffen;
+        }
+        set
+        {
+            if (Geschwindigkeit != 0)
+            {
+                return;
+            }
+
+            isVerdeckOffen = value;
+        }
+    }
+
+    public Cabrio(string marke, string modell, int baujahr, ILog logger, bool isVerdeckOffen = false) : base(marke, modell, baujahr, logger)
     {
         IsVerdeckOffen = isVerdeckOffen;
     }    
