@@ -23,8 +23,21 @@
         // TextStatistik();
         // NumberToolsTest();
         // Autofahn();
+        // Logging();
+        TestBaujahr();
+    }
 
-        Logging();
+    static void TestBaujahr()
+    {
+        var logger = new FakeLogger();
+        var auto1 = new Auto("BMW", "3er", 2000, logger);
+
+        auto1.Baujahr = 1700;
+
+        if (logger.Messages.Any(msg => msg == "Es wurde versucht Baujahr auf einen ungültigen Wert (1700) zu setzen."))
+        {
+            Console.WriteLine("Warnung war da 👍");
+        }
     }
 
     static void Logging()
@@ -34,10 +47,15 @@
         logger.LogError("Beladung zu groß. Beladung wurde nicht geändert.");
         logger.LogInfo("Es gibt Reis! Baby, Baby, es gibt Reis!");
         logger.LogWarning("Achtung, es ist kalt draußen!");
+
+        var auto1 = new Auto("BMW", "3er", 2000, logger);
+        auto1.Baujahr = 1700;
     }
 
     static void Autofahn()
     {
+        var logger = new ConsoleLogger();
+
         var lkw1 = new Lkw(40000);
         Console.WriteLine(lkw1.Beladung);
         lkw1.Beladung = 40;
@@ -45,12 +63,12 @@
         lkw1.Beladung = 100_000;
         Console.WriteLine(lkw1.Beladung);
 
-        var cabrio1 = new Cabrio("BMW", "3er", 2000);
+        var cabrio1 = new Cabrio("BMW", "3er", 2000, logger);
         cabrio1.DisplayInfo();
 
-        var auto1 = new Auto("FooW", "Fooran", 1999);
+        var auto1 = new Auto("FooW", "Fooran", 1999, logger);
 
-        var auto2 = new Auto("Trabant", "P 60", 2005);
+        var auto2 = new Auto("Trabant", "P 60", 2005, logger);
 
         auto1.DisplayInfo();
         auto2.DisplayInfo();
