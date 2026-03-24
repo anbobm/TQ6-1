@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>HTML Spaß</title>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            ul, ol {
+                margin: 0 0 1em 2em;
+                padding-left: 1rem;
+                line-height: 1.6;
+                color: #0f172a;
+            }
+
+            ol li { color: #0f172a; }
+            ol li::marker { color: #FFB13D; font-weight: 600; }
+
+            li + li {
+                margin-top: 0.45em;
+            }
+
+            ul {
+                list-style: disc;
+            }
+
+            ul li {
+                position: relative;
+                padding-left: 0.3rem;
+            }
+
+            ul li::marker { color: #FFB13D; font-weight: 600; }
+            ul ul, ol ol, ul ol, ol ul {
+                margin-top: 0.35em;
+                margin-bottom: 0;
+                padding-left: 1rem;
+            }
+
+            pre code {
+                display: block;
+                background: #f1f3f5;
+                padding: 0;
+                margin: 0;
+            }
+            code {
+                font-family: Menlo, Monaco, "Courier New", monospace;
+                background: #f1f3f5;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 90%;
+            }
+        
+            blockquote {
+                margin: 1.2em 0;
+                padding: 0.9em 1.1em;
+                border-left: 10px solid rgba(255,171,61,0.5);
+                background: rgba(255,171,61,0.25);
+                color: #0b1220;
+                line-height: 1.45;
+                border-radius: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML Spaß</h1>
+        <time datetime="2026-03-24">2026-03-24</time>
+        <h2>Inhalt</h2>
+        <ol>
+            <li>Emphasis and importance</li>
+            <li>Lists</li>
+            <li>Test: HTML text basics</li>
+            <li>Advanced text features</li>
+            <li>Test: Advanced HTML text</li>
+            <li>Creating Links</li>
+            <li>Test: Links</li>
+        </ol>
+        <h2>Emphasis and importance</h2>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Emphasis_and_importance">Mozilla: Emphasis and importance</a>
+        <h3>Excercise</h3>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Emphasis_and_importance#lets_play_with_emphasis_and_importance">
+            <h3>Let's play with emphasis and importance</h3>
+
+            <p>In this section, we want you to play with emphasis and importance:</p>
+            <ol>
+                <li>Click "Play" in the code block below to edit the example in the MDN Playground.</li>
+                <li>In the main heading give the word "Emphasis" emphasis, and the word "importance" strong importance.</li>
+                <li>In the first paragraph, give the coffee machine name strong importance, and emphasize the adjectives used to describe the coffee.</li>
+                <li>In the second paragraph, give the temperature description ("cold") and the action you should take ("wrap up warm to avoid falling ill") strong importance. Give "falling ill" some extra markup so it is both emphasized and important.</li>
+            </ol>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Emphasis_and_importance#lets_play_with_emphasis_and_importance">Source: Mozilla Emphasis and importance</a>
+        </blockquote>
+
+        <h3>Solution</h3>
+<pre><code>
+&lt;h1&gt;&lt;em&gt;Emphasis&lt;/em&gt; and &lt;strong&gt;importance&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;
+    My new coffee machine is called The &lt;strong&gt;Percolator 2000&lt;/strong&gt;. It produces the most
+    &lt;em&gt;sublime&lt;/em&gt; and &lt;em&gt;wonderful&lt;/em&gt; brew.
+&lt;/p&gt;
+
+&lt;p&gt;
+    In the dead of winter, it will be &lt;strong&gt;cold&lt;/strong&gt;. You should &lt;strong&gt;wrap up warm to avoid
+    &lt;em&gt;falling ill&lt;/em&gt;&lt;/strong&gt;.
+&lt;/p&gt;
+</code></pre>
+
+        <h2>Lists</h2>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists">Source: Mozilla - Lists</a>
+        <h3>Exercise</h3>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists#marking_up_our_recipe_page">
+            <p>Marking up our recipe page</p>
+
+            <p>Now for a real challenge! At this point in the article, you have all the information you need to mark up a slightly more complex section of content. We want you to mark up the instructions for our favorite hummus recipe.</p>
+
+            <p>You can choose to either:</p>
+            <ul>
+                <li>Save a local copy of our text-start.html starting file and do the work in your code editor.</li>
+                <li>Click "Play" in the rendered code output below to edit the example in the MDN Playground.</li>
+            </ul>
+            The instructions you need to follow are:
+            <ol>
+                <li>Mark up the main page title using an &lt;h1&gt; element, and the three subtitles using &lt;h2&gt; elements.</li>
+                <li>There are five lines of text that make sense to be marked up with &lt;p&gt; elements. Do this now.</li>
+                <li>Mark up the list of ingredients as an unordered list.</li>
+                <li>Mark up the list of instructions as an ordered list.</li>
+            </ol> 
+            <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists#marking_up_our_recipe_page">Source</a>
+        </blockquote>
+        <h3>Solution</h3>
+<pre><code>
+&lt;h1&gt;Quick hummus recipe&lt;/h1&gt;
+
+&lt;p&gt;This recipe makes quick, tasty hummus, with no messing. It has been adapted from a number of different recipes that I have read over the years.&lt;/p&gt;
+
+&lt;p&gt;Hummus is a delicious thick paste used heavily in Greek and Middle Eastern dishes. It is very tasty with salad, grilled meats and pitta breads.&lt;/p&gt;
+
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;1 can (400g) of chick peas (garbanzo beans)&lt;/li&gt;
+    &lt;li&gt;175g of tahini&lt;/li&gt;
+    &lt;li&gt;6 sundried tomatoes&lt;/li&gt;
+    &lt;li&gt;Half a red pepper&lt;/li&gt;
+    &lt;li&gt;A pinch of cayenne pepper&lt;/li&gt;
+    &lt;li&gt;1 clove of garlic&lt;/li&gt;
+    &lt;li&gt;A dash of olive oil&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Instructions&lt;/h2&gt;
+&lt;ol&gt;
+    &lt;li&gt;Remove the skin from the garlic, and chop coarsely&lt;/li&gt;
+    &lt;li&gt;Remove all the seeds and stalk from the pepper, and chop coarsely&lt;/li&gt;
+    &lt;li&gt;Add all the ingredients into a food processor&lt;/li&gt;
+    &lt;li&gt;Process all the ingredients into a paste.&lt;/li&gt;
+        &lt;ul&gt;
+            &lt;li&gt;If you want a coarse "chunky" hummus, process it for a short time&lt;/li&gt;
+            &lt;li&gt;If you want a smooth hummus, process it for a longer time&lt;/li&gt;
+        &lt;/ul&gt;
+&lt;/ol&gt;
+&lt;p&gt;For a different flavour, you could try blending in a small measure of lemon and coriander, chili pepper, lime and chipotle, harissa and mint, or spinach and feta cheese. Experiment and see what works for you.&lt;/p&gt;
+
+&lt;h2&gt;Storage&lt;/h2&gt;
+
+&lt;p&gt;Refrigerate the finished hummus in a sealed container. You should be able to use it for about a week after you've made it. If it starts to become fizzy, you should definitely discard it.&lt;/p&gt;
+
+&lt;p&gt;Hummus is suitable for freezing; you should thaw it and use it within a couple of months.&lt;/p&gt;
+</code></pre>
+        <h2>Test: HTML text basics</h2>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_1">
+            <h3>Text basics 1</h3>
+
+            <p>In this task, we want you to mark up the provided HTML using semantic heading and paragraph elements.</p>
+
+            <p>The starting point of the task looks like this:</p>
+        </blockquote>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<h1><em>Emphasis</em> and <strong>importance</strong></h1>
+
+<p>
+  My new coffee machine is called The <strong>Percolator 2000</strong>. It produces the most
+  <em>sublime</em> and <em>wonderful</em> brew.
+</p>
+
+<p>
+  In the dead of winter, it will be <strong>cold</strong>. You should <strong>wrap up warm to avoid
+  <em>falling ill</em></strong>.
+</p>
