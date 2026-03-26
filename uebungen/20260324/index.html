@@ -9,6 +9,19 @@
                 font-family: sans-serif;
             }
 
+            h1, h2, h3, h4, h5, h6 {
+              color: #0f172a;
+              font-weight: 600;
+              scroll-margin-top: 1.5rem;
+            }
+
+            h1 { font-size: 1.5rem; margin: 0.7em 0 0.7em 0; }
+            h2 { font-size: 1.25rem; margin: 0.7em 0 0.7em 0;}
+            h3 { font-size: 1.25rem; margin: 0.5em 0 0.5 0;}
+            h4 { font-size: 1.125rem; margin: 0.5em 0 0.5 0;}
+            h5 { font-size: 1rem; margin: 0.5em 0 0 0;}
+            h6 { font-size: 0.9rem; margin: 0.5em 0 0 0;}
+
             ul, ol {
                 margin: 0 0 1em 2em;
                 padding-left: 1rem;
@@ -45,12 +58,20 @@
                 padding: 0;
                 margin: 0;
             }
+
             code {
-                font-family: Menlo, Monaco, "Courier New", monospace;
+                font-family: "Cantarell", "Liberation Mono", Menlo, Monaco, "Courier New", monospace;
                 background: #f1f3f5;
                 padding: 2px 6px;
                 border-radius: 4px;
                 font-size: 90%;
+            }
+
+            section.preview {
+                background: #ECE0FF;
+                padding: 1rem;
+                border-left: 10px solid #C5A1FF;
+                border-radius: 6px;
             }
         
             blockquote {
@@ -61,6 +82,11 @@
                 color: #0b1220;
                 line-height: 1.45;
                 border-radius: 6px;
+            }
+
+            dt {
+                color: #FFB13D;
+                font-weight: bold;
             }
         </style>
     </head>
@@ -108,9 +134,25 @@
 &lt;/p&gt;
 </code></pre>
 
+        <h2>Solution Preview</h2>
+
+        <section class="preview">
+            <h1 style="font-weight: normal;"><em>Emphasis</em> and <strong>importance</strong></h1>
+
+            <p>
+                My new coffee machine is called The <strong>Percolator 2000</strong>. It produces the most
+                <em>sublime</em> and <em>wonderful</em> brew.
+            </p>
+
+            <p>
+                In the dead of winter, it will be <strong>cold</strong>. You should <strong>wrap up warm to avoid
+                <em>falling ill</em></strong>.
+            </p>
+        </section>
+
         <h2>Lists</h2>
         <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists">Source: Mozilla - Lists</a>
-        <h3>Exercise</h3>
+        <h3>Exercise: Recipe</h3>
         <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Lists#marking_up_our_recipe_page">
             <p>Marking up our recipe page</p>
 
@@ -169,13 +211,190 @@
 
 &lt;p&gt;Hummus is suitable for freezing; you should thaw it and use it within a couple of months.&lt;/p&gt;
 </code></pre>
+        <h2>Solution Preview</h2>
+        <section class="preview">
+            <h1>Quick hummus recipe</h1>
+
+            <p>This recipe makes quick, tasty hummus, with no messing. It has been adapted from a number of different recipes that I have read over the years.</p>
+
+            <p>Hummus is a delicious thick paste used heavily in Greek and Middle Eastern dishes. It is very tasty with salad, grilled meats and pitta breads.</p>
+
+            <h2>Ingredients</h2>
+
+            <ul>
+                <li>1 can (400g) of chick peas (garbanzo beans)</li>
+                <li>175g of tahini</li>
+                <li>6 sundried tomatoes</li>
+                <li>Half a red pepper</li>
+                <li>A pinch of cayenne pepper</li>
+                <li>1 clove of garlic</li>
+                <li>A dash of olive oil</li>
+            </ul>
+
+            <h2>Instructions</h2>
+            <ol>
+                <li>Remove the skin from the garlic, and chop coarsely</li>
+                <li>Remove all the seeds and stalk from the pepper, and chop coarsely</li>
+                <li>Add all the ingredients into a food processor</li>
+                <li>Process all the ingredients into a paste.</li>
+                    <ul>
+                        <li>If you want a coarse "chunky" hummus, process it for a short time</li>
+                        <li>If you want a smooth hummus, process it for a longer time</li>
+                    </ul>
+            </ol>
+            <p>For a different flavour, you could try blending in a small measure of lemon and coriander, chili pepper, lime and chipotle, harissa and mint, or spinach and feta cheese. Experiment and see what works for you.</p>
+
+            <h2>Storage</h2>
+
+            <p>Refrigerate the finished hummus in a sealed container. You should be able to use it for about a week after you've made it. If it starts to become fizzy, you should definitely discard it.</p>
+
+            <p>Hummus is suitable for freezing; you should thaw it and use it within a couple of months.</p>
+        </section>
         <h2>Test: HTML text basics</h2>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics">Source: Mozilla Test your skills: HTML text basics</a>
         <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_1">
             <h3>Text basics 1</h3>
 
             <p>In this task, we want you to mark up the provided HTML using semantic heading and paragraph elements.</p>
 
             <p>The starting point of the task looks like this:</p>
+            <p>Basic HTML Animals This is the first paragraph in our page. It introduces our animals. The Llama Our Llama is a big fan of list items. When she spies a patch of them on a web page, she will eat them like sweets, licking her lips as she goes. The Anaconda The crafty anaconda likes to slither around the page, traveling rapidly by way of anchors to sneak up on his prey.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_1">Source: Text basics 1</a>
         </blockquote>
+        <h2>Solution: Text basics 1</h2>
+<pre><code>
+&lt;h1&gt;Basic HTML Animals&lt;/h1&gt;
+
+&lt;p&gt;This is the first paragraph in our page. It introduces our animals.&lt;/p&gt;
+
+&lt;h2&gt;The Llama&lt;/h2&gt;
+
+&lt;p&gt;Our Llama is a big fan of list items. When she spies a patch of them on a web page, she will eat them like sweets, licking her lips as she goes.&lt;/p&gt;
+
+&lt;h2&gt;The Anaconda&lt;/h2&gt;
+
+&lt;p&gt;The crafty anaconda likes to slither around the page, traveling rapidly by way of anchors to sneak up on his prey.&lt;/p&gt;
+</code></pre>
+        <h2>Solution Preview: Text basics 1</h2>
+        <section class="preview">
+            <h1>Basic HTML Animals</h1>
+
+            <p>This is the first paragraph in our page. It introduces our animals.</p>
+
+            <h2>The Llama</h2>
+
+            <p>Our Llama is a big fan of list items. When she spies a patch of them on a web page, she will eat them like sweets, licking her lips as she goes.</p>
+
+            <h2>The Anaconda</h2>
+
+            <p>The crafty anaconda likes to slither around the page, traveling rapidly by way of anchors to sneak up on his prey.</p>
+        </section>
+        <h2>Excercise: Text basics 2</h2>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_2">
+            <h3>Text basics 2</h3>
+            <p>
+                In this task, we want you to turn the first un-marked up list into an unordered list, and the second one into an ordered list.
+            </p>
+            <p>
+                The starting point of the task looks like this:
+            </p>
+            <h1>Looking at lists</h1>
+
+            <p>Turn the following list of my favorite vegetables into an unordered list.</p>
+
+            Cucumber
+            Broccoli
+            Asparagus
+            Pepper
+
+            <p>Turn the following directions into an ordered list.</p>
+
+            First knock on the door
+            When prompted, say the magic word
+            Wait for at least 5 seconds
+            Turn the handle and push
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_2">Source: Text basics 2</a>
+            </p>
+        </blockquote>
+        <h2>Solution: Text basics 2</h2>
+<pre><code>
+&lt;h1&gt;Looking at lists&lt;/h1&gt;
+
+&lt;p&gt;Turn the following list of my favorite vegetables into an unordered list.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cucumber&lt;/li&gt;
+  &lt;li&gt;Broccoli&lt;/li&gt;
+  &lt;li&gt;Asparagus&lt;/li&gt;
+  &lt;li&gt;Pepper&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Turn the following directions into an ordered list.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;First knock on the door&lt;/li&gt;
+  &lt;li&gt;When prompted, say the magic word&lt;/li&gt;
+  &lt;li&gt;Wait for at least 5 seconds&lt;/li&gt;
+  &lt;li&gt;Turn the handle and push&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+        <h2>Solution Preview: Text Basics 2</h2>
+        <section class="preview">
+            <h1>Looking at lists</h1>
+
+            <p>Turn the following list of my favorite vegetables into an unordered list.</p>
+
+            <ul>
+              <li>Cucumber</li>
+              <li>Broccoli</li>
+              <li>Asparagus</li>
+              <li>Pepper</li>
+            </ul>
+            <p>Turn the following directions into an ordered list.</p>
+            <ol>
+              <li>First knock on the door</li>
+              <li>When prompted, say the magic word</li>
+              <li>Wait for at least 5 seconds</li>
+              <li>Turn the handle and push</li>
+            </ol>
+        </section>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_3">
+            <h2>Text basics 3</h2>
+            <p>In this task, we want you to turn the provided animals and their definitions into a description list.</p>
+            <p>The starting point of the task looks like this:</p>
+            <h1>Advanced HTML Animals</h1>
+
+            Llama
+            Tall, woolly quadruped, pointy ears. Sometimes rideable, but grumpy and spits a lot. Big fan of list items.
+            Anaconda
+            A very large constrictor snake; travels rapidly by way of anchors to sneak up on his prey.
+            Hippopotamus
+            His description is bottomless.
+            <p><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Test_your_skills/HTML_text_basics#text_basics_3">Source: Text basics 3</a></p>
+        </blockquote>
+        <h2>Solution Text basics 3</h2>
+<pre><code>
+&lt;h1&gt;Advanced HTML Animals&lt;/h1&gt;
+&lt;dl&gt;
+    &lt;dt&gt;Llama&lt;/dt&gt;
+        &lt;dd&gt;Tall, woolly quadruped, pointy ears. Sometimes rideable, but grumpy and spits a lot. Big fan of list items.&lt;/dd&gt;
+    &lt;dt&gt;Anaconda&lt;/dt&gt;
+        &lt;dd&gt;A very large constrictor snake; travels rapidly by way of anchors to sneak up on his prey.&lt;/dd&gt;
+    &lt;dt&gt;Hippopotamus&lt;/dt&gt;
+        &lt;dd&gt;His description is bottomless.&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+        <h2>Solution Preview: Text basics 3</h2>
+        <section class="preview">
+            <h1>Advanced HTML Animals</h1>
+            <dl>
+                <dt>Llama</dt>
+                    <dd>Tall, woolly quadruped, pointy ears. Sometimes rideable, but grumpy and spits a lot. Big fan of list items.</dd>
+                <dt>Anaconda</dt>
+                    <dd>A very large constrictor snake; travels rapidly by way of anchors to sneak up on his prey.</dd>
+                <dt>Hippopotamus</dt>
+                    <dd>His description is bottomless.</dd>
+            </dl>
+        </section>
+        <h2>Text Basics 4</h2>
     </body>
 </html>
