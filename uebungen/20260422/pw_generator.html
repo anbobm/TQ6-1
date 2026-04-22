@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+  </head>
+  <body>
+    <input id="lengthInput" placeholder="Länge"></input>
+    <button id="number-btn">Nur Zahlen</button>
+    <button id="letters-btn">Nur Buchstaben</button>
+    <button id="number-letter-btn">Gemischt</button>
+    <p id="info-display"></p>
+    <p id="pw-display"></p>
+    <script>
+        const lengthInput = document.getElementById('lengthInput')
+        const numberBtn = document.getElementById('number-btn')
+        const lettersBtn = document.getElementById('letters-btn')
+        const numbersLettersBtn = document.getElementById('number-letter-btn')
+        const pwDisplay = document.getElementById('pw-display')
+        const infoDisplay = document.getElementById('info-display')
+
+        numberBtn.addEventListener('click', ()=>{
+            const length = parseInt(lengthInput.value)
+            if(!validLength(length)){
+                infoDisplay.textContent = 'Ungültige Länge'
+            }
+            const generator = erstelleGenerator('0123456789')
+            const password = generator(length)
+            console.log(password)
+            infoDisplay.textContent = ''
+            pwDisplay.textContent = password
+        })
+
+        numbersLettersBtn.addEventListener('click', ()=>{
+            const length = parseInt(lengthInput.value)
+            if(!validLength(length)){
+                infoDisplay.textContent = 'Ungültige Länge'
+            }
+            const generator = erstelleGenerator('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+            const password = generator(length)
+            console.log(password)
+            infoDisplay.textContent = ''
+            pwDisplay.textContent = password
+        })
+
+        lettersBtn.addEventListener('click', ()=>{
+            const length = parseInt(lengthInput.value)
+            if(!validLength(length)){
+                infoDisplay.textContent = 'Ungültige Länge'
+            }
+            const generator = erstelleGenerator('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+            const password = generator(length)
+            console.log(password)
+            infoDisplay.textContent = ''
+            pwDisplay.textContent = password
+        })
+
+        function validLength(length){
+            if(isNaN(length) || length < 5){
+                return false
+            }
+            return true
+        }
+
+        function erstelleGenerator(zeichensatz){
+            const generator = (pwLength)=>{
+                console.log(zeichensatz)
+                let pwString = '' 
+                for(let i=0; i<pwLength; i+=1){
+                    pwString += zeichensatz[Math.floor(Math.random() * zeichensatz.length)]
+                }
+                return pwString
+            }
+            return generator
+        }
+    </script>
+  </body>
+</html>

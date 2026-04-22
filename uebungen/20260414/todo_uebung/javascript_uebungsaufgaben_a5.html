@@ -1,0 +1,87 @@
+<!-- Aufgabe 5 – HTML-Ausgabe der Todo-Liste -->
+
+<input id="eingabe" type="text" placeholder="Neues Todo..." />
+<button id="addBtn">Hinzufügen</button>
+<p id="statistik"></p>
+<ul id="liste"></ul>
+
+<script>
+  const KEY = "todos";
+
+  function todosLaden() {
+    const raw = localStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  function todosSpeichern(todos) {
+    localStorage.setItem(KEY, JSON.stringify(todos));
+  }
+
+  function todoErstellen(text) {
+    return { id: Date.now(), text, erledigt: false };
+  }
+
+  function todoHinzufuegen(text) {
+    const todos = todosLaden();
+    todos.push(todoErstellen(text));
+    todosSpeichern(todos);
+  }
+
+  function todoUmschalten(id) {
+    const todos = todosLaden();
+    const todo = todos.find((t) => t.id === id);
+    if (todo) todo.erledigt = !todo.erledigt;
+    todosSpeichern(todos);
+  }
+
+  function todoLoeschen(id) {
+    todosSpeichern(todosLaden().filter((t) => t.id !== id));
+  }
+
+  function listeAnzeigen() {
+    const ul = document.getElementById("liste");
+    const todos = todosLaden();
+    ul.innerHTML = "";
+
+    todos.forEach((todo) => {
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = todo.text;
+      if (todo.erledigt) span.style.textDecoration = "line-through";
+
+      const btnCheck = document.createElement("button");
+      btnCheck.textContent = "✔";
+      btnCheck.onclick = () => {
+        todoUmschalten(todo.id);
+        listeAnzeigen();
+      };
+
+      const btnDel = document.createElement("button");
+      btnDel.textContent = "✕";
+      btnDel.onclick = () => {
+        todoLoeschen(todo.id);
+        listeAnzeigen();
+      };
+
+      li.append(span, btnCheck, btnDel);
+      ul.appendChild(li);
+    });
+
+    const erledigt = todos.filter((t) => t.erledigt).length;
+    document.getElementById("statistik").textContent =
+      `${erledigt} von ${todos.length} erledigt`;
+  }
+
+  document.getElementById("addBtn").onclick = () => {
+    const eingabe = document.getElementById("eingabe");
+    const text = eingabe.value.trim();
+    if (text) {
+      todoHinzufuegen(text);
+      eingabe.value = "";
+      listeAnzeigen();
+    }
+  };
+
+  listeAnzeigen();
+</script>

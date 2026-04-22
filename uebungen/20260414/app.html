@@ -4,27 +4,52 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="app.js" defer></script>
-    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="style.css">
     <title>Titel</title>
   </head>
   <body>
     <main>
-            <fieldset>
-                <legend>Transaktion</legend>
-                <label for="betragInput">Betrag</label>
-                <input id="betragInput" type="text", placeholder="Betrag"></input>
+            <section>
                 <fieldset>
-                    <legend>Einnahme/Ausgabe</legend>
-                    <div>
-                        <label class="inline">Einnahme</label>
-                        <input type="radio" value="einnahme" name="typeInput" selected></input>
-                    </div>
-                    <div>
-                        <label>Ausgabe</label>
-                        <input type="radio" value="ausgabe" name="typeInput"></input>
-                    </div>
+                    <legend>Transaktion</legend>
+                    <label for="betragInput">Betrag</label>
+                    <input id="betragInput" type="number", placeholder="Betrag"></input>
+                    <label for="dateInput">Datum</label>
+                    <input id="dateInput" type="date"></input>
+                    <fieldset id="categoryField">
+                        <legend id="catLegend">Einnahme/Ausgabe</legend>
+                        <div>
+                            <label class="inline">Einnahme</label>
+                            <input type="radio" value="einnahme" name="typeInput" checked></input>
+                        </div>
+                        <div>
+                            <label class="inline">Ausgabe</label>
+                            <input type="radio" value="ausgabe" name="typeInput"></input>
+                        </div>
+                        <label for="incomeSelect">Einnahmen Kategorie</label>
+                        <select id="incomeSelect">
+                            <option value="0">--Bitte wähle eine Kategorie --</option>
+                            <option value="gehalt">Gehalt</option>
+                            <option value="nebenjob">Nebenjob</option>
+                            <option value="Geschenk">Geschenk</option>
+                            <option value="Sonstiges">Sonstiges</option>
+                        </select>
+                        <label for="expenseSelect">Ausgaben Kategorie</label>
+                        <select id="expenseSelect">
+                            <option value="0">--Bitte wähle eine Kategorie --</option>
+                            <option value="lebensmittel">Lebensmittel</option>
+                            <option value="miete">Miete</option>
+                            <option value="transport">Transport</option>
+                            <option value="freizeit">Freizeit</option>
+                            <option value="gesundheit">Gesundheit</option>
+                            <option value="sonstiges">Sonstiges</option>
+                        </select>
+                    </fieldset>
+                        <label for="descriptionInput">Beschreibung</label>
+                        <textarea id="descriptionInput" placeholder="Beschreibung" rows="5"></textarea>
+                        <button id="saveBtn">Speichern</button>
                 </fieldset>
-            </fieldset>
+            </section>
     </main>
   </body>
 </html>

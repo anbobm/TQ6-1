@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+  </head>
+  <body>
+    <p id="timer"></p>
+    <div id="question-card"></div>
+    <ul id="resultList"></ul>
+    <script>
+        const questionCard = document.getElementById('question-card')
+        const resultList = document.getElementById('resultList')
+        const timer = document.getElementById('timer')
+        const questions = [
+            {question: 'Beste Jahreszeit?', answers: ['Frühling', 'Sommer', 'Herbst', 'Winter'], correctIndex: 1},
+            {question: 'Beste Farbe?', answers: ['Blau', 'Rot', 'Gelb', 'Grün'], correctIndex: 1},
+            {question: 'Bester Schachspieler?', answers: ['Magnus Carlsen', 'Hikaru Nakamura', 'Danya Naroditsky', 'Bobby Fischer'], correctIndex: 0},
+            {question: 'Bester Sport', answers: ['Fußball', 'Handball', 'Volleyball', 'Baseball'], correctIndex: 0},
+            {question: 'Beste Automarke', answers: ['Ferrari', 'Porsche', 'Jaguar', 'Mercedes'], correctIndex: 2},
+        ]
+        let timeRemaining = 10
+        let currentIndex = 0
+        let result = []
+
+        renderResult(){
+            while(resultList.firstChild){
+                resultList.removeChild(resultList.firstChild)
+            }
+            result.forEach((entry)=>{
+                
+            })
+        }
+
+        function renderCard(index){
+            const randomIndex = index
+            //const randomIndex = Math.floor(Math.random()*questions.length)
+            const question = document.createElement('div')
+            question.innerHTML = questions[randomIndex].question
+            questionCard.appendChild(question)
+            questions[randomIndex].answers.forEach((answer, index)=>{
+                const answerBtn = document.createElement('button')
+                answerBtn.innerHTML = answer
+                answerBtn.addEventListener('click', ()=>{
+                    result.push(index === questions[randomIndex].correct)
+                })
+                questionCard.appendChild('answerBtn')
+            })
+        }
+
+        function gametick(){
+            timeRemaining -= 1
+            if(timeRemaining < 1){
+                timeRemaining = 10
+                currentIndex +=1
+                renderCard(currentIndex)
+            }
+        }
+        setInterval(gametick, 1000)
+
+    </script>
+  </body>
+</html>

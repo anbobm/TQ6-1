@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+  </head>
+  <body>
+    <fieldset>
+        <legend>Text-Analyse</legend>
+        <textarea id="textInput" rows="20" cols="40"></textarea>
+        <br>
+        <button id="analyseBtn">Analysieren</button>
+    </fieldset>
+    <section>
+        <h1>Analyse</h1>
+        <p id="noText">Kein Text zum analysieren</p>
+        <ul id="output-list">
+    </section>
+    <script>
+        const analyseBtn = document.getElementById('analyseBtn')
+        analyseBtn.addEventListener('click', ()=>{
+            analyseText()
+        })
+
+        function analyseText(){
+            const text = document.getElementById('textInput').value
+            const textArr = text.split(' ')
+            const textArrLower = textArr.map((word)=>{return word.toLowerCase()})
+            const textArrClean = textArrLower.filter((word)=>{return word !== ''})
+            //const resultObj = textArrClean.reduce((sum, word)=>{return word})
+
+            const resultObj = {}
+            textArrClean.forEach((word)=>{
+                if(resultObj[word]){resultObj[word]+=1}
+                if(!resultObj[word]){resultObj[word]=1}
+            })
+
+            console.log(Object.entries(resultObj))
+            const sorted = Object.entries(resultObj).sort((a, b)=>{return b[1]-a[1]})
+            
+            const outputList = document.getElementById('output-list')
+            sorted.forEach((entry)=>{
+                const listEntry = document.createElement('li')
+                listEntry.textContent = `${entry[0]}: ${entry[1]}`
+                outputList.appendChild(listEntry)
+            })
+            
+
+            console.log(resultObj)
+            console.log(sorted)
+        }
+
+    </script>
+  </body>
+</html>

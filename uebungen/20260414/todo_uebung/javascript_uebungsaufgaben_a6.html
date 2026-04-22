@@ -1,0 +1,230 @@
+<!-- Aufgabe 6 – Filter & Statistik -->
+
+<input id="eingabe" type="text" placeholder="Neues Todo..." />
+<button id="addBtn">Hinzufügen</button>
+
+<br /><br />
+<button onclick="filterSetzen('alle')">Alle</button>
+<button onclick="filterSetzen('offen')">Offen</button>
+<button onclick="filterSetzen('erledigt')">Erledigt</button>
+<button onclick="erledigteLoeschen()">Erledigte löschen</button>
+
+<p id="statistik"></p>
+<ul id="liste"></ul>
+
+<script>
+  const KEY = "todos";
+  const FILTER_KEY = "filter";
+
+    class TodoStore {
+        #key
+        constructor(key){
+            this.#key = key
+        }
+
+        laden(){
+            const saveString = localStorage.getItem(this.#key)
+            if(!saveString)return []
+            return JSON.parse(saveString)
+        }
+
+        speichern(todos){
+            localStorage.setItem(this.#key, JSON.stringify(todos))
+        }
+
+        umschalten(id){
+            const todoList = laden()
+            const taskIndex = todoList.findIndex((todo)=>{
+                return todo.id === id
+            })
+
+            if(taskIndex === -1)return false
+
+            todoList[taskIndex].erledigt = !todoList[taskIndex].erledigt
+            speichern(todoList)
+            return true
+        }
+
+        loeschen(id){
+            const todoList = laden()
+            speichern(todoList.filter((todo)=>{
+                return todo.id === id
+            }))
+        }
+
+        get anzahl(){
+            const todoList = laden()
+            return todoList.length
+        }
+
+        get erledigteProzent(){
+            const todoList = laden()
+            const erledigte = todoList.filter((todo)=>{
+                return todo.erledigt
+            })
+            return erledigte.length * 100 / todoList.length
+        }
+
+        static ausMigration(altKey, neuKey){
+            const saveString = localStorage.getItem(altKey)
+            if(!saveString)return false
+            localStorage.setItem(neuKey, saveString)
+            return true
+        }
+    }
+
+    class PrioTodoStore extends TodoStore{
+        constructor(id){
+
+        }
+    }
+
+    const todoStore = new TodoStore('todos')
+
+    
+
+    function erstelleFilter(feld, wert){
+        const filter = (feld, wert)=>{
+            todos.filter((todo)=>{
+                return todo[feld] = wert
+            }) 
+        }
+        return filter
+    }
+
+    function todoAktualisieren(todos, id, aenderung){
+        const newTodoList = todos.map((todo)=>{
+            if(id === todo.id){
+                return {...todo, ...aenderung} 
+            }else{
+                return todo
+            }
+        })
+        return newTodoList
+    }
+
+    function todoAnzeigen({text, erledigt, id}){
+        let status = 'offen'
+        if(erledigt)status = 'erledigt'
+        const dateTime = new Date(id).toISOString()
+        const dateTimeArr = dateTime.split('T')
+        const date = dateTimeArr[0]
+        console.log(`[${date}] ${text} - ${status}`)
+    }
+
+    function texteExtrahieren(){
+        const todos = todosLaden()
+        return todos.map((todo)=>{return todo.text})
+    }
+
+    function alleErledigt(){
+        const todos = todosLaden()
+        return todos.every((todo)=>{return todo.erledigt})
+    }
+
+    function fortschritt(){
+        const todos = todosLaden()
+        const erledigteTodos = todos.filter((todo)=>{return todo.erledigt})
+        const percerntValue = (erledigteTodos.length * 100) / todos.length
+        return `${erledigteTodos.length} / ${todos.length} ${percerntValue}%`
+    }
+
+  function todosLaden() {
+    const raw = localStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  function todosSpeichern(todos) {
+    localStorage.setItem(KEY, JSON.stringify(todos));
+  }
+
+  function todoErstellen(text) {
+    return { id: Date.now(), text, erledigt: false };
+  }
+
+  function todoHinzufuegen(text) {
+    const todos = todosLaden();
+    todos.push(todoErstellen(text));
+    todosSpeichern(todos);
+  }
+
+  function todoUmschalten(id) {
+    const todos = todosLaden();
+    const todo = todos.find((t) => t.id === id);
+    if (todo) todo.erledigt = !todo.erledigt;
+    todosSpeichern(todos);
+  }
+
+  function todoLoeschen(id) {
+    todosSpeichern(todosLaden().filter((t) => t.id !== id));
+  }
+
+  function filterSetzen(filter) {
+    aktuellerFilter = filter;
+    localStorage.setItem(FILTER_KEY, filter);
+    listeAnzeigen();
+  }
+
+  function erledigteLoeschen() {
+    todosSpeichern(todosLaden().filter((t) => !t.erledigt));
+    listeAnzeigen();
+  }
+
+  function statistikAnzeigen(todos) {
+    const erledigt = todos.filter((t) => t.erledigt).length;
+    document.getElementById("statistik").textContent =
+      `${erledigt} von ${todos.length} erledigt (Filter: ${aktuellerFilter})`;
+  }
+
+  function listeAnzeigen() {
+    const alle = todosLaden();
+
+    const sichtbar = alle.filter((t) => {
+      if (aktuellerFilter === "offen") return !t.erledigt;
+      if (aktuellerFilter === "erledigt") return t.erledigt;
+      return true;
+    });
+
+    const ul = document.getElementById("liste");
+    ul.innerHTML = "";
+
+    sichtbar.forEach((todo) => {
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = todo.text;
+      if (todo.erledigt) span.style.textDecoration = "line-through";
+
+      const btnCheck = document.createElement("button");
+      btnCheck.textContent = "✔";
+      btnCheck.onclick = () => {
+        todoUmschalten(todo.id);
+        listeAnzeigen();
+      };
+
+      const btnDel = document.createElement("button");
+      btnDel.textContent = "✕";
+      btnDel.onclick = () => {
+        todoLoeschen(todo.id);
+        listeAnzeigen();
+      };
+
+      li.append(span, btnCheck, btnDel);
+      ul.appendChild(li);
+    });
+
+    statistikAnzeigen(alle);
+  }
+
+  document.getElementById("addBtn").onclick = () => {
+    const eingabe = document.getElementById("eingabe");
+    const text = eingabe.value.trim();
+    if (text) {
+      todoHinzufuegen(text);
+      eingabe.value = "";
+      listeAnzeigen();
+    }
+  };
+
+  listeAnzeigen();
+</script>
