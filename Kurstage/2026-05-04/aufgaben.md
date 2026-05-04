@@ -12,3 +12,8 @@ Das Formular sendet die Daten an die `Greeting`-Page aus Aufgabe 1: `action="/Gr
 # Aufgabe 3
 
 Ergänze das Formular um ein Textfeld, in dem der Nutzer sein Alter angeben kann. Die `OnGet`-Methode kann nun direkt einen Parameter vom Typ `int` bekommen. Untersuche, wie dieser sich verhält, wenn der entsprechende Schlüssel leer ist oder keine Zahl enthält.
+
+
+# Aufgabe 4
+
+Anstatt seines Alters soll der Benutzer nun sein Geburtstag angeben. In `OnGet` prüfen wir dann, ob der Benutzer heute Geburtstag hat. Falls ja gratulieren wir ihm.
