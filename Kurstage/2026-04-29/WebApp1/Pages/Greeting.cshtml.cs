@@ -4,8 +4,11 @@ public class GreetingModel : PageModel
 {
     public string Name { get; set; }
 
-    public void OnGet(string name)
+    public int? Alter { get; set; }
+
+    public void OnGet(string name, int? alter)
     {
         Name = name;
+        Alter = alter;
     }
 }
