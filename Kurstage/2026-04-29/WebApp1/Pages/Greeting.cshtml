@@ -2,4 +2,7 @@
 @model GreetingModel
 
 <p>Willkommen, @Model.Name!</p>
-<p>Du bist @Model.Alter Jahre alt.</p>
+@if(Model.IsBirthday)
+{
+    <p>Alles Gute zum Geburtstag!</p>
+}

@@ -4,11 +4,17 @@ public class GreetingModel : PageModel
 {
     public string Name { get; set; }
 
-    public int? Alter { get; set; }
+    public bool IsBirthday { get; set; }
 
-    public void OnGet(string name, int? alter)
+    public void OnGet(string name, DateTime geburtsdatum)
     {
         Name = name;
-        Alter = alter;
+
+        var heute = DateTime.Now;
+
+        if (heute.Day == geburtsdatum.Day && heute.Month == geburtsdatum.Month)
+        {
+            IsBirthday = true;
+        }
     }
 }
