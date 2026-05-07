@@ -1,0 +1,16 @@
+@page
+@model VersandkostenModel
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <label for="selectbox">Location:</label>
+    <select name="location" id="selectbox">
+        <option value="">Bitte auswählen</option>
+        <option value="germany">Deutschland</option>
+        <option value="eu">EU</option>
+        <option value="international">International</option>
+    </select>
+    <input type="submit" value="Berechnen">
+</form>
+
+<p>Versandkosten: @Model.Versandkosten €</p>

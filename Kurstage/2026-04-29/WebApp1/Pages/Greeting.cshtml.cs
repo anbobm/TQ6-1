@@ -6,6 +6,8 @@ public class GreetingModel : PageModel
 
     public bool IsBirthday { get; set; }
 
+    public bool IsVolljährig { get; set; }
+
     public void OnGet(string name, DateTime geburtsdatum)
     {
         Name = name;
@@ -15,6 +17,13 @@ public class GreetingModel : PageModel
         if (heute.Day == geburtsdatum.Day && heute.Month == geburtsdatum.Month)
         {
             IsBirthday = true;
+        }
+
+        var achtzehnterGeburtstag = geburtsdatum.AddYears(18);
+
+        if (achtzehnterGeburtstag <= heute)
+        {
+            IsVolljährig = true;
         }
     }
 }
