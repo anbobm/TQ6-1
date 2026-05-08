@@ -1,0 +1,10 @@
+@page
+
+@if (String.IsNullOrEmpty(Request.Cookies["keks"]))
+{
+    <p>Cookie "keks" nicht gesetzt.</p>
+}
+else
+{
+    <p>Cookie "keks": @Request.Cookies["keks"]</p>
+}
