@@ -1,0 +1,60 @@
+@page
+@using RazorApp
+
+@{
+    var name = "Han";
+    var alter = 24;
+    var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+    var isLoggedIn = false;
+
+    var books = new[]
+    {
+        new Book { Title = "Der Hobbit",     Author = "J.R.R. Tolkien", Pages = 310 },
+        new Book { Title = "1984",           Author = "George Orwell",   Pages = 328 },
+        new Book { Title = "Der Alchimist",  Author = "Paulo Coelho",    Pages = 208 }
+    };
+}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>Startseite</title>
+</head>
+<body>
+    <h1>Willkommen!</h1>
+
+    <p>Ich bin @name und bin @alter Jahre alt.</p>
+
+    <p>Aktuelles Datum: @currentDate</p>
+
+    @if (isLoggedIn)
+    {
+        <p>Willkommen zurück</p>
+    }
+    else
+    {
+        <a href="/login">Login</a>
+    }
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Autor</th>
+                <th>Seiten</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Pages</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

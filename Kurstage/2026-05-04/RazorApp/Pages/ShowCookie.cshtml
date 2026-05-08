@@ -1,0 +1,52 @@
+@page
+@model RazorApp.Pages.ShowCookieModel
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <title>Cookie anzeigen</title>
+</head>
+<body>
+    <h1>Cookie-Wert</h1>
+
+    @if (Model.CookieValue != null)
+    {
+        <p>Cookie = <strong>@Model.CookieValue</strong></p>
+    }
+    else
+    {
+        <p>Cookie ist noch nicht gesetzt.</p>
+    }
+
+    <hr />
+    <h2>Alle Cookies</h2>
+
+    @if (Model.AlleCookies.Count == 0)
+    {
+        <p>Keine Cookies vorhanden.</p>
+    }
+    else
+    {
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Wert</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cookie in Model.AlleCookies)
+                {
+                    <tr>
+                        <td>@cookie.Key</td>
+                        <td>@cookie.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a href="/SetCookie">Cookie setzen</a>
+</body>
+</html>
