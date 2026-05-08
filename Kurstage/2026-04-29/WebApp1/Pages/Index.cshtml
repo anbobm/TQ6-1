@@ -1,0 +1,31 @@
+@page
+@model IndexModel
+@{
+    var name = "Paul";
+    var alter = 35;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webapp</title>
+    <style>
+        input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Webapp</h1>
+    <p>Ich bin @name und bin @alter Jahre alt.</p>
+    <p>Foo: @Model.Foo</p>
+    <form action="/Greeting" method="get">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <label for="geburtsdatum">Geburtsdatum</label>
+        <input type="date" name="geburtsdatum" id="geburtsdatum">
+        <input type="submit" value="Begrüßen">
+    </form>
+    <p>Cookie foo: @Model.Cookie</p>
+</body>
+</html>

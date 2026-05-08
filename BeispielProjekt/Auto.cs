@@ -1,9 +1,31 @@
-abstract class Fahrzeug2
+abstract class Fortbewegungsmittel
 {
-    abstract public void Fahren();
+    public double Geschwindigkeit { get; set; }
 }
 
-class Auto2 : Fahrzeug2
+abstract class Schwimmzeug : Fortbewegungsmittel
+{
+    abstract public void Schwimmen();
+}
+
+abstract class Flugzeug : Fortbewegungsmittel
+{
+    abstract public void Fliegen();
+}
+
+abstract class Fahrzeug : Fortbewegungsmittel
+{
+    abstract public void Fahren();
+
+    virtual public int Baujahr { get; set; }
+
+    virtual public string Marke { get; set; }
+
+    virtual public string Modell { get; set; }
+}
+
+
+class Auto : Fahrzeug
 {
     private Dictionary<string, string[]> marken = new Dictionary<string, string[]>()
     {
@@ -18,8 +40,12 @@ class Auto2 : Fahrzeug2
 
     private string modell;
 
-    public Auto2(string marke, string modell, int baujahr)
+    private ILog logger;
+
+    public Auto(string marke, string modell, int baujahr, ILog logger)
     {
+        this.logger = logger;
+
         if (baujahr < 1880) this.baujahr = 1880;
 
         this.baujahr = baujahr;
@@ -42,7 +68,7 @@ class Auto2 : Fahrzeug2
         this.modell = modell;
     }
 
-    public int Baujahr
+    override public int Baujahr
     {
         get
         {
@@ -50,13 +76,17 @@ class Auto2 : Fahrzeug2
         }
         set
         {
-            if (value < 1880) return;
+            if (value < 1880)
+            {
+                logger.LogWarning($"Es wurde versucht Baujahr auf einen ungültigen Wert ({value}) zu setzen.");
+                return;
+            }
             
             baujahr = value;
         }
     }
     
-    public string Marke
+    override public string Marke
     {
         get
         {
@@ -72,7 +102,7 @@ class Auto2 : Fahrzeug2
         }
     }
 
-    public string Modell
+    override public string Modell
     {
         get
         {
@@ -92,15 +122,35 @@ class Auto2 : Fahrzeug2
 
     public override void Fahren()
     {
-        Console.WriteLine("Brumm Brumm!");
+        if (DateTime.Now.Hour >= 12)
+        {
+            Console.WriteLine("Brumm Brumm!");
+        }
     }
 }
 
-class Cabrio2 : Auto2
+class Cabrio : Auto
 {
-    public bool IsVerdeckOffen {get; set;}
+    private bool isVerdeckOffen;
 
-    public Cabrio2(string marke, string modell, int baujahr, bool isVerdeckOffen = false) : base(marke, modell, baujahr)
+    public bool IsVerdeckOffen
+    {
+        get
+        {
+            return isVerdeckOffen;
+        }
+        set
+        {
+            if (Geschwindigkeit != 0)
+            {
+                return;
+            }
+
+            isVerdeckOffen = value;
+        }
+    }
+
+    public Cabrio(string marke, string modell, int baujahr, ILog logger, bool isVerdeckOffen = false) : base(marke, modell, baujahr, logger)
     {
         IsVerdeckOffen = isVerdeckOffen;
     }    
@@ -112,5 +162,39 @@ class Cabrio2 : Auto2
         }else{
             Console.Write(" Es regnet mal wieder. Verdeck zu. Laune im Keller 😑\n");
         }
+    }
+}
+
+class Lkw : Fahrzeug
+{
+    private int beladung;
+
+    public int Beladung
+    {
+        get
+        {
+            return beladung;
+        }
+        set
+        {
+            if (value < 0 || value > MaximaleBeladung)
+            {
+                return;
+            }
+
+            beladung = value;
+        }
+    }
+
+    public int MaximaleBeladung { get; private set; }
+
+    public Lkw(int maximaleBeladung)
+    {
+        MaximaleBeladung = maximaleBeladung;
+    }
+
+    public override void Fahren()
+    {
+        Console.WriteLine("Der LKW fährt 🤷");
     }
 }

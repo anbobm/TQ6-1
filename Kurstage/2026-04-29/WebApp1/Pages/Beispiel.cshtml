@@ -1,0 +1,51 @@
+﻿@page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebApp1</title>
+</head>
+<body>
+    @{
+        var name = "Paul";
+        var zahl = 3;
+        var foo = true;
+        var logged_in = true;
+        string[] liste = ["element1", "element2"];
+
+        for (var i = 0; i < 10; i++) {
+            <p>@i</p>
+        }
+
+        Book[] books = [
+            new Book {
+                Title = "Foo",
+                Author = "Bar",
+                Pages = 301
+            },
+            new Book {
+                Title = "Foo",
+                Author = "Bar",
+                Pages = 301
+            }
+        ];
+    }
+
+    <ul>
+        @foreach(var ding in liste)
+        {
+            <li>@ding</li>
+        }
+    </ul>
+
+    @if(logged_in) {
+        <button>Ausloggen</button>
+    }
+
+    <h1>Hallo @name</h1>
+    <p>@(zahl + 4)</p>
+    <input type="text" class="@(foo ? "foo" : "")">
+
+    <p>Datum: @DateTime.Now.ToString()</p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+@page
+@model GreetingModel
+
+<p>Willkommen, @Model.Name!</p>
+@if(Model.IsBirthday)
+{
+    <p>Alles Gute zum Geburtstag!</p>
+}
+
+@if(Model.IsVolljährig)
+{
+    <p>Du bist volljährig!</p>
+}
+else
+{
+    <p>Du bist <strong>nicht</strong> volljährig!</p>
+}

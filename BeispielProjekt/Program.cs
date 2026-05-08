@@ -23,6 +23,7 @@ internal class Program
         // TextStatistik();
         // NumberToolsTest();
         // Autofahn();
+<<<<<<< HEAD
         TestLogger();
     }
 
@@ -37,16 +38,54 @@ internal class Program
         file.LogInfo("Server gestartet");
         file.LogWarning("Speicher niedrig");
         file.LogError("Verbindung getrennt");
+=======
+        // Logging();
+        TestBaujahr();
+    }
+
+    static void TestBaujahr()
+    {
+        var logger = new FakeLogger();
+        var auto1 = new Auto("BMW", "3er", 2000, logger);
+
+        auto1.Baujahr = 1700;
+
+        if (logger.Messages.Any(msg => msg == "Es wurde versucht Baujahr auf einen ungültigen Wert (1700) zu setzen."))
+        {
+            Console.WriteLine("Warnung war da 👍");
+        }
+    }
+
+    static void Logging()
+    {
+        var logger = new FileLogger("filelogger.log");
+
+        logger.LogError("Beladung zu groß. Beladung wurde nicht geändert.");
+        logger.LogInfo("Es gibt Reis! Baby, Baby, es gibt Reis!");
+        logger.LogWarning("Achtung, es ist kalt draußen!");
+
+        var auto1 = new Auto("BMW", "3er", 2000, logger);
+        auto1.Baujahr = 1700;
+>>>>>>> main
     }
 
     static void Autofahn()
     {
-        var cabrio1 = new Cabrio2("BMW", "3er", 2000);
+        var logger = new ConsoleLogger();
+
+        var lkw1 = new Lkw(40000);
+        Console.WriteLine(lkw1.Beladung);
+        lkw1.Beladung = 40;
+        Console.WriteLine(lkw1.Beladung);
+        lkw1.Beladung = 100_000;
+        Console.WriteLine(lkw1.Beladung);
+
+        var cabrio1 = new Cabrio("BMW", "3er", 2000, logger);
         cabrio1.DisplayInfo();
 
-        var auto1 = new Auto2("FooW", "Fooran", 1999);
+        var auto1 = new Auto("FooW", "Fooran", 1999, logger);
 
-        var auto2 = new Auto2("Trabant", "P 60", 2005);
+        var auto2 = new Auto("Trabant", "P 60", 2005, logger);
 
         auto1.DisplayInfo();
         auto2.DisplayInfo();
@@ -130,6 +169,7 @@ internal class Program
         }
     }
 
+<<<<<<< HEAD
     static void TestAuto2()
     {
         Auto2 auto1 = new Auto2("BMW", "3er", 2020);
@@ -139,6 +179,41 @@ internal class Program
         auto1.DisplayInfo();
         auto2.DisplayInfo();
         auto3.DisplayInfo();
+=======
+
+    static void Exceptions()
+    {
+        try
+        {
+            // Convert.ToInt32("foobar");
+            int NULL = 0;
+            var foo = 1 / NULL;
+        }
+        catch(FormatException)
+        {
+            Console.WriteLine("String war nicht in einem korrekten Format");
+        }
+    }
+
+    static void Tupel()
+    {
+        var person = ("Alice", 30, "Dorfweg 1, 01234 Dorf");
+
+        Console.WriteLine(person.Item1);
+        Console.WriteLine(person.Item2);
+        Console.WriteLine(person.Item3);
+
+        person.Item1 = "Max";
+
+        Console.WriteLine(person);
+
+        var person2 = GetPerson();
+    }
+
+    static (string, int)  GetPerson()
+    {
+        return ("Bob", 25);
+>>>>>>> main
     }
 
     private static void Dictionaries()
