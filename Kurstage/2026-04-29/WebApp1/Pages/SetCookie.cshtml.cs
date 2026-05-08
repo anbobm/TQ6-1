@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class SetCookieModel : PageModel
 {
-    public void OnGet(string keks)
+    public void OnGet(string key, string value)
     {
-        if (keks == null)
+        if (key == null || value == null)
         {
             return;
         }
 
-        Response.Cookies.Append("keks", keks);
+        Response.Cookies.Append(key, value);
     }
 }
