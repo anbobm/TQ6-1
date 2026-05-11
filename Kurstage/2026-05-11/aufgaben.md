@@ -18,4 +18,4 @@ var db = new Db();
 
 # Aufgabe 2
 
-Erstelle nun auf gleiche Weise für die Entität `Mitglied` mit den Attributen `Id`, `Vorname`, `Nachname` und `Email` jeweils eine Tabelle, Klasse und Page zum Anzeigen.
+Erstelle nun auf gleiche Weise für die Entität `Member` mit den Attributen `Id`, `FirstName`, `LastName` und `Email` jeweils eine Tabelle, Klasse und Page zum Anzeigen.
