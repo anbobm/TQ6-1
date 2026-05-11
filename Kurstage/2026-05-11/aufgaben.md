@@ -15,3 +15,7 @@ var db = new Db();
 
 ... db.Books.ToList();
 ```
+
+# Aufgabe 2
+
+Erstelle nun auf gleiche Weise für die Entität `Member` mit den Attributen `Id`, `FirstName`, `LastName` und `Email` jeweils eine Tabelle, Klasse und Page zum Anzeigen.
