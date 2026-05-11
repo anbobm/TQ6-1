@@ -1,0 +1,22 @@
+@page
+@model RazorApp.Pages.BooksModel
+
+<h1>Bücher</h1>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Buch1</th>
+        <th>Titel</th>
+        <th>Autor</th>
+        <th>Seiten</th>
+    </tr>
+    @foreach (var book in Model.Books)
+    {
+        <tr>
+            <td>@book.Id</td>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.Pages</td>
+        </tr>
+    }
+</table>
