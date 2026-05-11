@@ -9,3 +9,7 @@ Im Netzwerk-Tab der Developer-Tools deines Browsers kannst du sehen, wie der Web
 # Aufgabe 2
 
 Erweitere die Page `/ShowCookie` derart, dass sie nicht nur das selbstgewählte Cookie anzeigt, sondern alle Cookies, die der Client zum Server geschickt hat.
+
+# Aufgabe 3
+
+Bearbeite die Page `SetCookie` so, dass man sowohl Schlüssel als auch Wert selbst wählen kann.
