@@ -1,0 +1,8 @@
+@page
+@model BooksModel
+
+<ul>
+    @foreach(var book in Model.Books) {
+        <li>@book.Title</li>
+    }
+</ul>
