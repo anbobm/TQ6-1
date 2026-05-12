@@ -1,0 +1,22 @@
+@page
+@model RazorApp.Pages.MembersModel
+
+<h1>Mitglieder</h1>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Id</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>E-Mail</th>
+    </tr>
+    @foreach (var member in Model.Members)
+    {
+        <tr>
+            <td>@member.Id</td>
+            <td>@member.FirstName</td>
+            <td>@member.LastName</td>
+            <td>@member.Email</td>
+        </tr>
+    }
+</table>
