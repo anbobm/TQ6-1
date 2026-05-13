@@ -1,0 +1,18 @@
+@page
+@model AddBookModel
+
+<h1>Buch hinzufügen</h1>
+
+<form method="post">
+    <label for="">Autor: 
+        <select name="author">
+            <option value="">Autor auswählen</option>
+            @foreach(var author in Model.Authors) {
+                <option value="@author.Id">@author.FirstName @author.LastName</option>
+            }
+        </select>
+    </label>
+    <label>Titel: <input type="text" name="title"></label>
+    <label>Seitenzahl: <input type="number" name="pages"></label>
+    <input type="submit" value="Hinzufügen">
+</form>
