@@ -1,0 +1,31 @@
+@page
+@model RazorApp.Pages.SearchBookModel
+
+<h1>Buch suchen</h1>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <input type="text" placeholder="Titel suchen..." name="search">
+    <button type="submit">Suchen</button>
+</form>
+
+@if (Model.Results.Any())
+{
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Id</th>
+            <th>Titel</th>
+            <th>Author</th>
+            <th>Pages</th>
+        </tr>
+        @foreach (var book in Model.Results)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Pages</td>
+            </tr>
+        }
+    </table>
+}
