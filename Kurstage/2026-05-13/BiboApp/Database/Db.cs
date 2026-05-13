@@ -6,6 +6,8 @@ public class Db : DbContext
 
     public DbSet<Author> Authors { get; set; }
 
+    public DbSet<Genre> Genres { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=db.db");
 }
