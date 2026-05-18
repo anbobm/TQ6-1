@@ -24,7 +24,16 @@
         // NumberToolsTest();
         // Autofahn();
         // Logging();
-        TestBaujahr();
+        // TestBaujahr();
+        // LinqSelect();
+    }
+
+    static void LinqSelect()
+    {
+        
+        string[] foo = ["foo", "bar", "trallala"];
+
+        var result = foo.Select((s) => s.Count()).ToArray();
     }
 
     static void TestBaujahr()
