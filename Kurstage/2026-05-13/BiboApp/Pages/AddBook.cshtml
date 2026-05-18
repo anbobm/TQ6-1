@@ -4,11 +4,19 @@
 <h1>Buch hinzufügen</h1>
 
 <form method="post">
-    <label for="">Autor: 
+    <label>Autor: 
         <select name="author">
             <option value="">Autor auswählen</option>
             @foreach(var author in Model.Authors) {
                 <option value="@author.Id">@author.FirstName @author.LastName</option>
+            }
+        </select>
+    </label>
+        <label>Genre: 
+        <select name="genre">
+            <option value="">Genre auswählen</option>
+            @foreach(var genre in Model.Genres) {
+                <option value="@genre.Id">@genre.Name</option>
             }
         </select>
     </label>
