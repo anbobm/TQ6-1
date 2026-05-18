@@ -12,5 +12,9 @@ public class IndexModel : PageModel
 
         var books = db.Books.Include(b => b.Author).ToList();
 
+        // Beispielcode für Book-Publisher-Relationship
+        var parfum = db.Books
+            .Include(b => b.Publishers)
+            .Where(b => b.Id == 3).First();
     }
 }

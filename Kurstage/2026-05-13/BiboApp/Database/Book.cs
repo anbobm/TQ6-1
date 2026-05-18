@@ -13,4 +13,6 @@ public class Book
     public Genre Genre { get; set; }
 
     public Author Author { get; set; }
+
+    public List<Publisher> Publishers { get; set; }
 }
