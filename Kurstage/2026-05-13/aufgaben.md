@@ -5,3 +5,7 @@ Erstelle eine Tabelle und zugehörige Datenbankklasse `Genre` mit einer `string`
 Lege ein paar Beispiel-Genres in deiner Datenbank an.
 
 Passe die `/AddBook`-Page entsprechend an, so dass der Benutzer dort ein Genre aus der Datenbank auswählen kann.
+
+# Aufgabe 2
+
+Erstelle eine `/AddAuthor`- und eine `/AddGenre`-Page um Datenbankeinträge für diese beiden Entitäten erzeugen zu können.
