@@ -1,0 +1,35 @@
+@page
+@model IndexModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Not Kniffel</title>
+  </head>
+  <body>
+        <main>
+            <section>
+                <fieldset>
+                    <legend>Hauptmenü</legend>
+                    <a href="Newgame">Neues Spiel</a>
+                    <a href="Loadgame">Spiel laden</a>
+                    <a href="Game">Test Spiel</a>
+                </fieldset>
+                <fieldset>
+                    <legend>Neuer Spieler</legend>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <label>
+                            Name
+                            <input type="text" name="playerNameInput">
+                        </label>
+                        <button>Spieler erstellen</button>
+                    </form>
+                </fieldset>
+            </section>
+        </main>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+@page
+@model NewgameModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="module" src="/js/newgame.js"></script>
+    <title>Not Kniffel</title>
+  </head>
+  <body>
+        <main>
+            <section>
+                <fieldset>
+                    <legend>Neues Spiel</legend>
+                    <label>Spieler hinzufügen
+                        <select id="playerSelect">
+                            <option value="0">-- Spieler hinzufügen --</option>
+                            @foreach(var player in Model.Players){
+                                <option value="@player.Id", data-name="@player.Name">@player.Name</option>
+                            }
+                        </select>
+                    </label>
+                    <button id="addPlayerBtn" disabled>Hinzufügen</button>
+                    <form method="get" action="/Game">
+                        <input name="players" class="hidden" id="gameSettingsInput"></input>
+                        <button id="startGameBtn" disabled>Spiel Starten</button>
+                    </form>
+                    <a href="/Playercreate">Spieler anlegen</a>
+                </fieldset>
+            </section>
+            <section>
+                <h2>Mitspieler</h2>
+                <ul id="playerList"></ul>
+            </section>
+        </main>
+  </body>
+</html>

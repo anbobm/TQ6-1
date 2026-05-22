@@ -1,0 +1,39 @@
+@page
+@model GreetingModel
+
+@{
+    var date = DateTime.ParseExact(Model.Birthday, "yyyy-MM-dd", null);
+    var today = DateTime.Now.Date;
+
+    var todayDay = today.Day;
+    var bdayDay = date.Day;
+
+    var todayMonth = today.Month;
+    var bdayMonth = date.Month;
+
+    bool hasBirthday = false;
+
+    if(todayDay == bdayDay && todayMonth == bdayMonth){
+        hasBirthday = true;
+    }
+ 
+    var bigBirthday = date.AddYears(18);
+    
+    int ageCheck = DateTime.Compare(bigBirthday, today);
+}
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Greeting</title>
+  </head>
+  <body>
+    <h1>Hallo @Model.Name</h1>
+    @if(ageCheck > 0){<p>Du bist zu jung um diese Seite zu betreten</p>}
+    @if(!hasBirthday){<p>Just some random day.</p>}
+    @if(hasBirthday){<p>Happy Birthday!</p>}
+  </body>
+</html>

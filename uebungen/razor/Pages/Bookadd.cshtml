@@ -1,0 +1,47 @@
+@page
+@model BookAddModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Booksearch</title>
+  </head>
+  <body>
+    <main>
+        <section>
+            <fieldset>
+                <legend>Erstelle ein Buch</legend>
+                <form method="post">
+                    @Html.AntiForgeryToken()
+                    <label>Titel
+                        <input name="titleInput" placeholder="Titel">
+                    </label>
+                    <label>Author
+                        <select name="authorSelect">
+                            <option>-- Bitte Autor auswählen --</option>
+                            @foreach(var author in Model.Authors){
+                                <option value=@author.Id>@author.LastName @author.FirstName</option>
+                            }
+                        </select>
+                    </label>
+                    <label>Genre
+                        <select name="genreSelect">
+                            <option>-- Bitte Genre auswählen --</option>
+                            @foreach(var genre in Model.Genres){
+                                <option value=@genre.Id>@genre.Name</option>
+                            }
+                        </select>
+                    </label>
+                    <label>Seiten
+                        <input name="pagesInput" placeholder="Seiten">
+                    </label>
+                    <button>Speichern</button>
+                </form>
+            </fieldset>
+        </section>
+    </main>
+  </body>
+</html>

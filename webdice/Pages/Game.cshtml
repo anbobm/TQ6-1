@@ -1,0 +1,107 @@
+@page
+@model GameModel
+
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script type="module" src="/js/app.js"></script>
+        <title>Not Kniffel</title>
+    </head>
+    <body>
+        <main>
+            <section>
+                @foreach(var scoreSheet in Model.Game.ScoreSheets){
+                <table @if(Model.Game.ActiveScoreSheet.Id == scoreSheet.Id){<text>id="activeTable"</text>}>
+                        <caption>@scoreSheet.Player.Name</caption>
+                        <tr>
+                            <td>⚀ ⚀ ⚀</td>
+                            <td>@scoreSheet.Ones</td>
+                        </tr>
+                        <tr>
+                            <td>⚁ ⚁ ⚁</td>
+                            <td>@scoreSheet.Twos</td>
+                        </tr>
+                        <tr>
+                            <td>⚂ ⚂ ⚂</td>
+                            <td>@scoreSheet.Threes</td>
+                        </tr>
+                        <tr>
+                            <td>⚃ ⚃ ⚃</td>
+                            <td>@scoreSheet.Fours</td>
+                        </tr>
+                         <tr>
+                            <td>⚄ ⚄ ⚄</td>
+                            <td>@scoreSheet.Fives</td>
+                        </tr>
+                        <tr>
+                            <td>⚅ ⚅ ⚅</td>
+                            <td>@scoreSheet.Sixes</td>
+                        </tr>
+                        <tr>
+                            <td>Oberer Teil</td>
+                            <td>@scoreSheet.ScoreTopPart()</td>
+                        </tr>
+                         <tr>
+                            <td>Bonus Oben</td>
+                            <td>@scoreSheet.TopPartBonus(@scoreSheet.ScoreTopPart())</td>
+                        </tr>
+                        <tr>
+                            <td>Dreierpasch</td>
+                            <td>@scoreSheet.ThreeOfAKind</td>
+                        </tr>
+                        <tr>
+                            <td>Viererpasch</td>
+                            <td>@scoreSheet.FourOfAKind</td>
+                        </tr>
+                        <tr>
+                            <td>FullHouse</td>
+                            <td>@scoreSheet.FullHouse</td>
+                        </tr>
+                        <tr>
+                            <td>Kleine Str.</td>
+                            <td>@scoreSheet.Straight</td>
+                        </tr>
+                        <tr>
+                            <td>Große Str.</td>
+                            <td>@scoreSheet.LongStraight</td>
+                        </tr>
+                        <tr>
+                            <td>Knifelus</td>
+                            <td>@scoreSheet.FiveOfAKind</td>
+                        </tr>
+                        <tr>
+                            <td>Chance</td>
+                            <td>@scoreSheet.Chance</td>
+                        </tr>
+                        <tr>
+                            <td>Punkte Unten</td>
+                            <td>@scoreSheet.ScoreBottomPart()</td>
+                        </tr>
+                        <tr>
+                            <td>Punkte Gesamt</td>
+                            <td>@scoreSheet.ScoreTotal()</td>
+                        </tr>
+                    </table>
+                }
+            </section>
+            <section>
+                <h2>Am Zug: @Model.Game.ActiveScoreSheet.Player.Name</h2>
+                @if(Model.Action.Rolls.Count > 0){
+                    <div id="rollDiv">
+                        @foreach(int roll in Model.Action.Rolls[Model.Action.Rolls.Count-1]){
+                            <span>@Dice.GetSymbol(roll)</span>
+                        }
+                    </div>
+                }
+                <form method = "post" action = "/Game">
+                    @Html.AntiForgeryToken()
+                    <input id="actionInput" name="actionInput" value="@Model.ActionJson">
+                    <button id="actionButton">Würfeln</button>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+@page
+@model VersandModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Versandkosten</title>
+  </head>
+  <body>
+    <main>
+        <section>
+            <fieldset>
+                <legend>Versandkostenrechner</legend>
+                <form method="post">
+                    @Html.AntiForgeryToken()
+                    <label>Wohin?
+                        <select name="locationID">
+                                @{
+                                    int counter = 0;
+                                    foreach(string location in Model.Locations){
+                                        <option value=@counter>@location</option>
+                                        counter += 1;
+                                    }
+                                }
+                        </select>
+                    </label>
+                    <button>Berechne</button>
+                </form>
+            </fieldset>
+            <p>Kosten: @Model.Kosten €</p>
+        </section>
+    </main>
+  </body>
+</html>

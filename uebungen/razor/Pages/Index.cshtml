@@ -1,0 +1,32 @@
+@page
+@model IndexModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Mein Projekt</title>
+
+  </head>
+  <body>
+    <main>
+        <section>
+            <h1>Webapp</h1>
+            <fieldset>
+                <legend>Her mit deinen Informationen!</legend>
+                <form action="/Greeting", method="get">
+                    <label>Dein Name:
+                        <input name="name" type="text" placeholder="Bitte gib deinen Namen ein"></input>
+                    </label>
+                    <label>Dein Geburtstag:
+                    <input name="birthday" type="date" placeholder="Bitte gib dein Geburtsdatum ein"></input>
+                    </label>
+                    <button>Senden</button>
+                </form>
+            </fieldset>
+        </section>
+    </main>
+  </body>
+</html>

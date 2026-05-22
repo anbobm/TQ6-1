@@ -1,0 +1,28 @@
+@page
+@model MemberlistModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memberlist</title>
+  </head>
+  <body>
+    <main>
+        <section>
+            <table>
+                @foreach(var member in Model.Members){
+                    <tr>
+                        <td>@member.Id</td>
+                        <td>@member.FirstName</td>
+                        <td>@member.LastName</td>
+                        <td>@member.Email</td>
+                    </tr>
+                }
+            </table>
+        </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+*{
+    font-family: sans-serif; 
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr:nth-child(even){
+    background: #E6E6E6;
+}
+
+td {
+    border: 1px solid black;
+}
+
+fieldset {
+    padding: 0.7rem;
+}
+
+input {
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.player-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+section {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+}
+
+section h1 {
+    margin: 0, 0, 1rem, 0;
+    text-align: center
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+button {
+    width: 100%;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+label {
+    display: block;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,24 @@
+@page
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>CookieMonster</title>
+  </head>
+  <body>
+    <main>
+        <section>
+            <h1>Deine Kekse</h1>
+            <ol>
+                @foreach(var cookie in Request.Cookies){
+                    <li>Key: @cookie.Key Value: @cookie.Value</li>
+                }
+            </ol>
+            <a href="SetCookie">Meeeehr Kekse backen</a>
+        </section>
+    </main>
+  </body>
+</html>

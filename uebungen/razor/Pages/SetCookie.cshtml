@@ -1,0 +1,35 @@
+@page
+@model SetCookieModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Cookies</title>
+  </head>
+  <body>
+    <main>
+        <section>
+            @if(Model.CookieSet){
+                <p>Keks wurde gesetzt</p>
+            }
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <legend>Keks Setzer 3000</legend>
+                    <label>Keks
+                        <input name="keks">
+                    </label>
+                    <label>Keksfüllung
+                        <input name="keksfuellung">
+                    </label>
+                    <button>Keks setzen</button>
+                </fieldset> 
+            </form>
+            <a href="ShowCookie">Zeige Cookies</a>
+        </section>
+    </main>
+  </body>
+</html>
