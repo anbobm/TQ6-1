@@ -1,0 +1,37 @@
+@page
+@model LoadGameModel
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="module" src="/js/loadgame.js"></script>
+    <title>Not Kniffel</title>
+  </head>
+  <body>
+        <h1>Definitely not Kniffel</h1>
+        <main>
+            <section>
+                <fieldset>
+                    <legend>Spiel laden</legend>
+                    <label>Spieler hinzufügen
+                        <select id="gameSelect">
+                            <option value="0">-- Spiel auswählen --</option>
+                            @foreach(var game in Model.Games){
+                                <option value="@game.Id">@DateTime.Parse(game.CreatedAt).ToString("dd MMMM yyyy HH:mm")</option>
+                            }
+                        </select>
+                    </label>
+                    <form method="post" action="/Game">
+                        @Html.AntiForgeryToken()
+                        <input name="actionInput" id="actionInput" value="@Model.ActionJson" class="hidden"></input>
+                        <button id="loadGameBtn">Spiel Laden</button>
+                    </form>
+                    <a href="Index">Zurück zum Hauptmenü</a>
+                </fieldset>
+            </section>
+        </main>
+  </body>
+</html>

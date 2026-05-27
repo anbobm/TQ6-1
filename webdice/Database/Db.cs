@@ -14,5 +14,10 @@ class Db : DbContext{
             .HasOne(g => g.ActiveScoreSheet)
             .WithOne(s => s.ActiveGame)
             .HasForeignKey<Game>(g => g.ActiveScoreSheetId);
+
+        modelBuilder.Entity<Game>()
+            .Property(g=> g.CreatedAt)
+            .HasDefaultValueSql("datetime('now')")
+            .ValueGeneratedOnAdd();
     }
 }

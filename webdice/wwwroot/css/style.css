@@ -3,6 +3,11 @@
     box-sizing: border-box;
 }
 
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 table {
     width: 100%;
     border: 1px solid black;
@@ -14,7 +19,13 @@ tr:nth-child(even){
 }
 
 td {
+    min-width: 2.5rem;
     border: 1px solid black;
+}
+
+table.active-table caption {
+    font-weight: bold;
+    color: purple;
 }
 
 fieldset {
@@ -32,6 +43,7 @@ main {
     display: flex;
     width: 100%;
     justify-content: center;
+    gap: 3rem;
 }
 
 .game-grid {
@@ -41,6 +53,12 @@ main {
 }
 
 .player-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.scoresheet-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
@@ -75,6 +93,53 @@ label {
     width: 100%;
 }
 
+a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: underline
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 100;
+    padding: 3rem;
+    background: #ffffff;
+}
+
+.overlay h2 {
+    display: block;
+    width: 100%
+}
+
+.roll-div {
+    font-size: 4rem;
+    cursor: pointer;
+}
+
+.marked-row {
+    border: 3px solid green;
+}
+
 .hidden {
     display: none;
 }
+
+.right-align {
+    text-align: right;
+}
+

@@ -10,24 +10,14 @@
     <title>Not Kniffel</title>
   </head>
   <body>
+        <h1>Definitely not Kniffel</h1>
         <main>
             <section>
                 <fieldset>
                     <legend>Hauptmenü</legend>
                     <a href="Newgame">Neues Spiel</a>
-                    <a href="Loadgame">Spiel laden</a>
-                    <a href="Game">Test Spiel</a>
-                </fieldset>
-                <fieldset>
-                    <legend>Neuer Spieler</legend>
-                    <form method="post">
-                        @Html.AntiForgeryToken()
-                        <label>
-                            Name
-                            <input type="text" name="playerNameInput">
-                        </label>
-                        <button>Spieler erstellen</button>
-                    </form>
+                    <a href="LoadGame">Spiel laden</a>
+                    <a href="Playercreate">Spieler anlegen</a>
                 </fieldset>
             </section>
         </main>
